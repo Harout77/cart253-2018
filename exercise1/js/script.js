@@ -19,6 +19,12 @@ var feltTextureImage;
 var feltTextureImageX;
 var feltTextureImageY;
 
+// The added image of a red aballon
+var balloon;
+
+// The starting position of the balloon
+var balloonX;
+var balloonY;
 
 // preload()
 //
@@ -27,6 +33,7 @@ var feltTextureImageY;
 function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
+  balloon =("assets/images/balloon.jpg");
 }
 
 
