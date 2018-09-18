@@ -20,11 +20,16 @@ var feltTextureImageX;
 var feltTextureImageY;
 
 // The added image of a red aballon
-var balloon;
+  var balloon ;
 
 // The starting position of the balloon
-var balloonX;
-var balloonY;
+  var balloonX;
+  var balloonY;
+
+  // //cirlcle variables
+  var cirlceX = 0;
+  var circleY = 0;
+  var CircleSize = 250;
 
 // preload()
 //
@@ -33,7 +38,7 @@ var balloonY;
 function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
-  balloon =("assets/images/balloon.jpg");
+  balloon = loadImage("assets/images/balloon.png");
 }
 
 
@@ -55,31 +60,51 @@ function setup() {
 
   // We'll use imageMode CENTER for this script
   imageMode(CENTER);
+
 }
 
 
-// draw()
+// // draw()
+// //
+// // Moves the felt image linearly
+// // Moves the clown face toward the current mouse location
 //
-// Moves the felt image linearly
-// Moves the clown face toward the current mouse location
-
 function draw() {
 
-  // Move the felt image down by increasing its y position
+
+   // Move the felt image down by increasing its y position
   feltTextureImageY += 1;
-
-  // Display the felt image
+//
+//   // Display the felt image
   image(feltTextureImage,feltTextureImageX,feltTextureImageY);
-
-  // Move the clown by moving it 1/10th of its current distance from the mouse
-
-  // Calculate the distance in X and in Y
+//
+//   // Move the clown by moving it 1/10th of its current distance from the mouse
+//
+//   // Calculate the distance in X and in Y
   var xDistance = mouseX - clownImageX;
   var yDistance = mouseY - clownImageY;
-  // Add 1/10th of the x and y distance to the clown's current (x,y) location
+//   // Add 1/10th of the x and y distance to the clown's current (x,y) location
   clownImageX = clownImageX + xDistance/10;
   clownImageY = clownImageY + yDistance/10;
 
-  // Display the clown image
+//   // Display the clown image
   image(clownImage,clownImageX,clownImageY);
+//
+//   // Display the balloon images
+
+// // Draw a red cirlcle
+  ellipseMode(CORNER)
+  ellipse(cirlceX,circleY,CircleSize,CircleSize);
+  fill(255,0,0,1);
+  stroke(255,0,0,1);
+
+
+  imageMode(CORNER);
+  image(balloon,balloonX,balloonY);
+  image(balloon,0,0);
+
+// Make the circle move from left to right
+  cirlceX += 1;
+  balloonX += 1;
+
 }
