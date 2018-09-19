@@ -20,16 +20,12 @@ var feltTextureImageX;
 var feltTextureImageY;
 
 // The added image of a red aballon
-  var balloon ;
+  var balloon =0 ;
 
 // The starting position of the balloon
-  var balloonX;
-  var balloonY;
+  var balloonX =0;
+  var balloonY =0;
 
-  // //cirlcle variables
-  var cirlceX = 0;
-  var circleY = 0;
-  var CircleSize = 250;
 
 // preload()
 //
@@ -38,6 +34,8 @@ var feltTextureImageY;
 function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
+
+  // Load the images that I added for the exercise
   balloon = loadImage("assets/images/balloon.png");
 }
 
@@ -49,6 +47,7 @@ function preload() {
 function setup() {
   // Create our canvas
   createCanvas(640,640);
+
 
   // Start the clown image at the centre of the canvas
   clownImageX = width/2;
@@ -71,6 +70,10 @@ function setup() {
 //
 function draw() {
 
+// Clear all repetitive images
+  fill(255,0,0);
+  stroke(100,0,0);
+  background(255,255,255)
 
    // Move the felt image down by increasing its y position
   feltTextureImageY += 1;
@@ -92,19 +95,17 @@ function draw() {
 //
 //   // Display the balloon images
 
-// // Draw a red cirlcle
-  ellipseMode(CORNER)
-  ellipse(cirlceX,circleY,CircleSize,CircleSize);
-  fill(255,0,0,1);
-  stroke(255,0,0,1);
+  // ellipseMode(CORNER)
+  // ellipse(cirlceX,circleY,CircleSize,CircleSize);
+  // fill(255,0,0,1);
+  // stroke(255,0,0,1);
 
-
+  // Display image of the ballon
   imageMode(CORNER);
   image(balloon,balloonX,balloonY);
-  image(balloon,0,0);
 
-// Make the circle move from left to right
-  cirlceX += 1;
+
+  // Make the balloon move from left to right
   balloonX += 1;
 
 }
