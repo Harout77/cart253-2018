@@ -43,8 +43,8 @@ var emojiY;
 // The image of a clown face
 var wizard;
 // The current position of the clown face
-var wizardX;
-var wizardY;
+var wizardX =0;
+var wizardY =0;
 
 // preload()
 //
