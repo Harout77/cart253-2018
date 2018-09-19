@@ -33,7 +33,12 @@ var candy;
 var candyX;
 var candyY;
 
+// The variable for the added emoji
+var emoji;
 
+// The current position of the emoji
+var emojiX;
+var emojiY;
 
 // preload()
 //
@@ -46,8 +51,9 @@ function preload() {
   // Load the images that I added for the exercise
   balloon = loadImage("assets/images/balloon.png");
   candy = loadImage("assets/images/candy.png");
-}
+  emoji = loadImage("assets/images/emoji.png");
 
+}
 
 // setup()
 //
@@ -69,8 +75,11 @@ function setup() {
   // We'll use imageMode CENTER for this script
   imageMode(CENTER);
 
-}
+  emojiX = width/2;
+  emojiY = height/2;
 
+
+}
 
 // // draw()
 // //
@@ -102,17 +111,9 @@ function draw() {
 //   // Display the clown image
   image(clownImage,clownImageX,clownImageY);
 //
-//   // Display the balloon images
-
-  // ellipseMode(CORNER)
-  // ellipse(cirlceX,circleY,CircleSize,CircleSize);
-  // fill(255,0,0,1);
-  // stroke(255,0,0,1);
-
   // Display image of the ballon
   imageMode(CORNER);
   image(balloon,balloonX,balloonY);
-
 
   // Make the balloon move from left to right
   balloonX += 1;
@@ -121,5 +122,20 @@ function draw() {
   candyX = mouseX;
   candyY = mouseY;
   image(candy,candyX,candyY);
+//
+//   //   // Calculate the distance in X and in Y for the emoji face
+//     var xDistance = mouseX - emojiX;
+//     var yDistance = mouseY - emojiY;
+// // Make the emoji move slower than the clown face
+//   emojiX = emojiX + xDistance/15;
+//   emojiY = emojiY + yDistance/15;
 
+// Using lerp to make the emoji follow the mouse slower than the clown
+var d = dist(emojiX,emojiY,mouseX,mouseY);
+
+emojyX = lerp(emojiX,mouseX,2/d);
+emojiY = lerp(emojiY,mouseY,2/d);
+
+  //   // Display the emoji image
+  image(emoji,emojiX,emojiY);
 }
