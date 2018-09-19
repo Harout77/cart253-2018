@@ -1,5 +1,5 @@
 // Exercise 1 - Moving pictures
-// Pippin Barr
+// Harout Kullukian
 //
 // Starter code for exercise 1.
 // It moves two pictures around on the canvas.
@@ -19,8 +19,8 @@ var feltTextureImage;
 var feltTextureImageX;
 var feltTextureImageY;
 
-// The added image of a red aballon
-var balloon =0 ;
+// The variable for the balloon
+var balloon;
 
 // The starting position of the balloon
 var balloonX =0;
@@ -40,6 +40,12 @@ var emoji;
 var emojiX;
 var emojiY;
 
+// The image of a clown face
+var wizard;
+// The current position of the clown face
+var wizardX;
+var wizardY;
+
 // preload()
 //
 // Load the two images we're using before the program starts
@@ -52,7 +58,7 @@ function preload() {
   balloon = loadImage("assets/images/balloon.png");
   candy = loadImage("assets/images/candy.png");
   emoji = loadImage("assets/images/emoji.png");
-
+  wizard = loadImage("assets/images/wizard.png");
 }
 
 // setup()
@@ -75,6 +81,7 @@ function setup() {
   // We'll use imageMode CENTER for this script
   imageMode(CENTER);
 
+  // Position where the emoji spawn within the canvas
   emojiX = width/2;
   emojiY = height/2;
 
@@ -89,9 +96,9 @@ function setup() {
 function draw() {
 
 // Clear all repetitive images
-  fill(255,0,0);
-  stroke(100,0,0);
-  background(255,255,255);
+  // fill(255,0,0);
+  // stroke(100,0,0);
+  // background(255,255,255);
 
    // Move the felt image down by increasing its y position
   feltTextureImageY += 1;
@@ -133,9 +140,18 @@ function draw() {
 // Using lerp to make the emoji follow the mouse slower than the clown
 var d = dist(emojiX,emojiY,mouseX,mouseY);
 
-emojyX = lerp(emojiX,mouseX,2/d);
+emojiX = lerp(emojiX,mouseX,2/d);
 emojiY = lerp(emojiY,mouseY,2/d);
 
   //   // Display the emoji image
   image(emoji,emojiX,emojiY);
+
+
+  wizardX += 1;
+  wizardY += 1;
+
+
+  image(wizard,wizardX,wizardY);
+
+
 }
