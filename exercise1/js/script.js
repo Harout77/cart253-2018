@@ -20,11 +20,19 @@ var feltTextureImageX;
 var feltTextureImageY;
 
 // The added image of a red aballon
-  var balloon =0 ;
+var balloon =0 ;
 
 // The starting position of the balloon
-  var balloonX =0;
-  var balloonY =0;
+var balloonX =0;
+var balloonY =0;
+
+// The variable for the added candy
+var candy;
+
+// The current position of the candy
+var candyX;
+var candyY;
+
 
 
 // preload()
@@ -37,6 +45,7 @@ function preload() {
 
   // Load the images that I added for the exercise
   balloon = loadImage("assets/images/balloon.png");
+  candy = loadImage("assets/images/candy.png");
 }
 
 
@@ -73,7 +82,7 @@ function draw() {
 // Clear all repetitive images
   fill(255,0,0);
   stroke(100,0,0);
-  background(255,255,255)
+  background(255,255,255);
 
    // Move the felt image down by increasing its y position
   feltTextureImageY += 1;
@@ -107,5 +116,10 @@ function draw() {
 
   // Make the balloon move from left to right
   balloonX += 1;
+
+  // Make the candy exactly follow the mnouse
+  candyX = mouseX;
+  candyY = mouseY;
+  image(candy,candyX,candyY);
 
 }
