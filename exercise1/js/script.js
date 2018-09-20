@@ -23,8 +23,8 @@ var feltTextureImageY;
   var balloon ;
 
 // The starting position of the balloon
-  var balloonX;
-  var balloonY;
+  var balloonX = 0;
+  var balloonY = 0;
 
   // //cirlcle variables
   var cirlceX = 0;
@@ -93,10 +93,13 @@ function draw() {
 //   // Display the balloon images
 
 // // Draw a red cirlcle
-  ellipseMode(CORNER)
+    
+    
+    
+ /* ellipseMode(CORNER)
   ellipse(cirlceX,circleY,CircleSize,CircleSize);
   fill(255,0,0,1);
-  stroke(255,0,0,1);
+  stroke(255,0,0,1); */
 
 
   imageMode(CORNER);
@@ -106,5 +109,7 @@ function draw() {
 // Make the circle move from left to right
   cirlceX += 1;
   balloonX += 1;
+    balloonY += 1;
+        
 
 }
