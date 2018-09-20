@@ -1,5 +1,5 @@
 // Exercise 1 - Moving pictures
-// Pippin Barr
+// Harout Kullukian
 //
 // Starter code for exercise 1.
 // It moves two pictures around on the canvas.
@@ -19,17 +19,37 @@ var feltTextureImage;
 var feltTextureImageX;
 var feltTextureImageY;
 
-// The added image of a red aballon
-  var balloon ;
+// The variable for the balloon
+var balloon;
 
 // The starting position of the balloon
+<<<<<<< HEAD:exercise1/js/script.js
   var balloonX = 0;
   var balloonY = 0;
+=======
+var balloonX =0;
+var balloonY =0;
+>>>>>>> 6d7a1142cb9a0e6e3e0910075d699c50d458dd1b:exercises/exercise1/js/script.js
 
-  // //cirlcle variables
-  var cirlceX = 0;
-  var circleY = 0;
-  var CircleSize = 250;
+// The variable for the added candy
+var candy;
+
+// The current position of the candy
+var candyX;
+var candyY;
+
+// The variable for the added emoji
+var emoji;
+
+// The current position of the emoji
+var emojiX;
+var emojiY;
+
+// The image of a clown face
+var wizard;
+// The current position of the clown face
+var wizardX =0;
+var wizardY =0;
 
 // preload()
 //
@@ -38,9 +58,13 @@ var feltTextureImageY;
 function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
-  balloon = loadImage("assets/images/balloon.png");
-}
 
+  // Load the images that I added for the exercise
+  balloon = loadImage("assets/images/balloon.png");
+  candy = loadImage("assets/images/candy.png");
+  emoji = loadImage("assets/images/emoji.png");
+  wizard = loadImage("assets/images/wizard.png");
+}
 
 // setup()
 //
@@ -49,6 +73,7 @@ function preload() {
 function setup() {
   // Create our canvas
   createCanvas(640,640);
+
 
   // Start the clown image at the centre of the canvas
   clownImageX = width/2;
@@ -61,8 +86,12 @@ function setup() {
   // We'll use imageMode CENTER for this script
   imageMode(CENTER);
 
-}
+  // Position where the emoji spawn within the canvas
+  emojiX = width/2;
+  emojiY = height/2;
 
+
+}
 
 // // draw()
 // //
@@ -71,6 +100,10 @@ function setup() {
 //
 function draw() {
 
+// Clear all repetitive images
+  // fill(255,0,0);
+  // stroke(100,0,0);
+  // background(255,255,255);
 
    // Move the felt image down by increasing its y position
   feltTextureImageY += 1;
@@ -90,6 +123,7 @@ function draw() {
 //   // Display the clown image
   image(clownImage,clownImageX,clownImageY);
 //
+<<<<<<< HEAD:exercise1/js/script.js
 //   // Display the balloon images
 
 // // Draw a red cirlcle
@@ -102,14 +136,44 @@ function draw() {
   stroke(255,0,0,1); */
 
 
+=======
+  // Display image of the ballon
+>>>>>>> 6d7a1142cb9a0e6e3e0910075d699c50d458dd1b:exercises/exercise1/js/script.js
   imageMode(CORNER);
   image(balloon,balloonX,balloonY);
-  image(balloon,0,0);
 
-// Make the circle move from left to right
-  cirlceX += 1;
+  // Make the balloon move from left to right
   balloonX += 1;
     balloonY += 1;
         
+
+  // Make the candy exactly follow the mnouse
+  candyX = mouseX;
+  candyY = mouseY;
+  image(candy,candyX,candyY);
+//
+//   //   // Calculate the distance in X and in Y for the emoji face
+//     var xDistance = mouseX - emojiX;
+//     var yDistance = mouseY - emojiY;
+// // Make the emoji move slower than the clown face
+//   emojiX = emojiX + xDistance/15;
+//   emojiY = emojiY + yDistance/15;
+
+// Using lerp to make the emoji follow the mouse slower than the clown
+var d = dist(emojiX,emojiY,mouseX,mouseY);
+
+emojiX = lerp(emojiX,mouseX,2/d);
+emojiY = lerp(emojiY,mouseY,2/d);
+
+  //   // Display the emoji image
+  image(emoji,emojiX,emojiY);
+
+
+  wizardX += 1;
+  wizardY += 1;
+
+
+  image(wizard,wizardX,wizardY);
+
 
 }
