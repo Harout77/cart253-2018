@@ -54,7 +54,7 @@ function preload() {
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
 
   // Load the images that I added for the exercise
-  balloon = loadImage("assets/images/balloon.png");
+  balloon = loadImage("assets/images/Balloon.png");
   candy = loadImage("assets/images/candy.png");
   emoji = loadImage("assets/images/emoji.png");
   wizard = loadImage("assets/images/wizard.png");
