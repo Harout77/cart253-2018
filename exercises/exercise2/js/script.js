@@ -1,8 +1,7 @@
 /*********************************************************
 
-Exercise 2 - The Artful Dodger
-Pippin Barr
-
+Exercise 2 - The Artful Dodger V2.0
+Harout Kullukian
 Starter code for exercise 2.
 
 *********************************************************/
@@ -18,6 +17,7 @@ var avatarVX = 0;
 var avatarVY = 0;
 
 // The position and size of the enemy circle
+var enemy;
 var enemyX;
 var enemyY;
 var enemySize = 50;
@@ -28,18 +28,26 @@ var enemySizeIncrease = 5;
 var enemySpeed = 5;
 var enemyVX = 5;
 // How much bigger the enemy circle gets with each successful dodge
-var enemySpeedIncrease = 0.5;
+var enemyrease = 0.5;
 
 // How many dodges the player has made
 var dodges = 0;
+
+var space;
+var y;
+
+
+
+
+
 
 // setup()
 //
 // Make the canvas, position the avatar and anemy
 function setup() {
   // Create our playing area
-  createCanvas(500,500);
-
+  createCanvas(750,450);
+  space = loadImage("assets/space.jpg");
   // Put the avatar in the centre
   avatarX = width/2;
   avatarY = height/2;
@@ -50,6 +58,8 @@ function setup() {
 
   // No stroke so it looks cleaner
   noStroke();
+    image(space, 0, 0);
+
 }
 
 // draw()
@@ -58,8 +68,15 @@ function setup() {
 // game over situations.
 function draw() {
   // A pink background
-  background(255,220,220);
+  background(space);
 
+  stroke(226, 204, 0);
+  line(0, y, width, y);
+
+  y++;
+  if (y > height) {
+    y = 0;
+  }
   // Default the avatar's velocity to 0 in case no key is pressed this frame
   avatarVX = 0;
   avatarVY = 0;
@@ -135,7 +152,7 @@ function draw() {
     enemyX = 0;
     enemyY = random(0,height);
     // Increase the enemy's speed and size to make the game harder
-    enemySpeed = enemySpeed + enemySpeedIncrease;
+    enemySpeed = enemySpeed + enemyrease;
     enemySize = enemySize + enemySizeIncrease;
   }
 
@@ -144,12 +161,25 @@ function draw() {
 
   // The player is black
   fill(0);
-  // Draw the player as a circle
+  // // Draw the player as a circle
   ellipse(avatarX,avatarY,avatarSize,avatarSize);
-
-  // The enemy is red
+  //
+  // // The enemy is red
   fill(255,0,0);
-  // Draw the enemy as a circle
+  // // // Draw the enemy as a circle
   ellipse(enemyX,enemyY,enemySize,enemySize);
+  // // background(255,255,255);
+
+
+ //Display score
+  textSize(20);
+  fill(255,255,255);
+  text("Score: " + dodges, 50, 50);
+
+
+
+
+
+
 
 }
