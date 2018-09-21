@@ -17,7 +17,6 @@ var avatarVX = 0;
 var avatarVY = 0;
 
 // The position and size of the enemy circle
-var enemy;
 var enemyX;
 var enemyY;
 var enemySize = 50;
@@ -36,7 +35,10 @@ var dodges = 0;
 var space;
 var y;
 
-
+var asteroid;
+var asteroidX;
+var asteroidY;
+var asteroidspeed = 5;
 
 
 
@@ -48,6 +50,8 @@ function setup() {
   // Create our playing area
   createCanvas(750,450);
   space = loadImage("assets/space.jpg");
+  asteroid = loadImage("assets/asteroid.png");
+
   // Put the avatar in the centre
   avatarX = width/2;
   avatarY = height/2;
@@ -68,6 +72,9 @@ function setup() {
 // game over situations.
 function draw() {
   // A pink background
+
+
+
   background(space);
 
   stroke(226, 204, 0);
@@ -168,8 +175,8 @@ function draw() {
   fill(255,0,0);
   // // // Draw the enemy as a circle
   ellipse(enemyX,enemyY,enemySize,enemySize);
-  // // background(255,255,255);
 
+  image(asteroid, 0, 0);
 
  //Display score
   textSize(20);
