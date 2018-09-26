@@ -32,9 +32,10 @@ var asteroidY;
 var asteroidSize = 50;
 
 // asteroid speed and velocity
-var asteroidSpeed = 5;
+var asteroidSpeed = 10;
 var asteroidVX = 0;
 var asteroidVY = 0;
+var astroidSpeedIncrease = 0.5;
 
 // The position and size of the astroids2
 var asteroid2;
@@ -43,17 +44,26 @@ var asteroid2Y;
 var asteroid2Size = 50;
 
 // asteroid2 speed and velocity
-var asteroid2Speed = 5;
+var asteroid2Speed = 11;
 var asteroid2VX = 0;
 var asteroid2VY = 0;
+var astroid2SpeedIncrease = 0.5;
 
+
+// custom font
+var star;
+
+// pre load custom font
+function preload() {
+  star = loadFont("assets/STJEDISE.ttf");
+}
 
 // setup()
 //
 // Make the canvas, position the ship and anemy
 function setup() {
   // Create our playing area
-  createCanvas(750,450);
+  createCanvas(windowWidth,windowHeight);
 
   // Loading assets
   space = loadImage("assets/space.jpg");
@@ -184,38 +194,40 @@ function draw() {
     dodges = 0;
   }
 
-  // Check if the enemy has moved all the way across the screen
+  // Check if the astroid has moved all the way across the screen
   if (asteroidX > width) {
     // This means the player dodged so update its dodge statistic
     dodges = dodges + 1;
     // Tell them how many dodges they have made
-    // Reset the enemy's position to the left at a random height
+    // Reset the astroid's position to the left at a random height
     asteroidX = 0;
     asteroidY = random(0,height);
-    // Increase the enemy's speed and size to make the game harder
+    // Increase the astroid's speed and size to make the game harder
+    asteroidSpeed = asteroidSpeed + astroidSpeedIncrease;
+
   }
   // // Display the current number of successful in the console
   // console.log(dodges);
 
-  // Check if the enemy has moved all the way across the screen
+  // Check if the astroid has moved all the way across the screen
   if (asteroid2X > width) {
     // This means the player dodged so update its dodge statistic
     dodges = dodges + 1;
     // Tell them how many dodges they have made
-    // Reset the enemy's position to the left at a random height
+    // Reset the astroids's position to the left at a random height
     asteroid2X = 0;
     asteroid2Y = random(0,height);
-    // Increase the enemy's speed and size to make the game harder
+
+    // Increase the astroids's speed and size to make the game harder
+    asteroidSpeed = asteroidSpeed + astroid2SpeedIncrease;
   }
 
+  // adding the second asteroid if the score is above 5
   if (dodges > 5 )
   {
     asteroid2VX = asteroid2Speed;
     asteroid2X = asteroid2X + asteroid2VX;
-
-
     image(asteroid2,asteroid2X,asteroid2Y);
-
   }
 
 
@@ -223,9 +235,11 @@ function draw() {
 
 
  //Display score
-  textSize(20);
+  textFont(star);
+  textSize(75);
   fill(255,255,255);
-  text("Score: " + dodges, 50, 50);
+  textAlign(CENTER);
+  text("Score " + dodges, width/2, height/8);
 
 
 
