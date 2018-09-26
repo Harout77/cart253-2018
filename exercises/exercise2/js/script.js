@@ -6,15 +6,16 @@ Starter code for exercise 2.
 
 *********************************************************/
 
-// The position and size of our avatar circle
-var avatarX;
-var avatarY;
-var avatarSize = 50;
+// The position and size of our ship circle
+var ship;
+var shipX;
+var shipY;
+var shipSize = 50;
 
-// The speed and velocity of our avatar circle
-var avatarSpeed = 10;
-var avatarVX = 0;
-var avatarVY = 0;
+// The speed and velocity of our ship circle
+var shipSpeed = 10;
+var shipVX = 0;
+var shipVY = 0;
 
 
 // How many dodges the player has made
@@ -35,10 +36,21 @@ var asteroidSpeed = 5;
 var asteroidVX = 0;
 var asteroidVY = 0;
 
+// The position and size of the astroids2
+var asteroid2;
+var asteroid2X;
+var asteroid2Y;
+var asteroid2Size = 50;
+
+// asteroid2 speed and velocity
+var asteroid2Speed = 5;
+var asteroid2VX = 0;
+var asteroid2VY = 0;
+
 
 // setup()
 //
-// Make the canvas, position the avatar and anemy
+// Make the canvas, position the ship and anemy
 function setup() {
   // Create our playing area
   createCanvas(750,450);
@@ -46,20 +58,25 @@ function setup() {
   // Loading assets
   space = loadImage("assets/space.jpg");
   asteroid = loadImage("assets/asteroid.png");
+  ship = loadImage("assets/ship.png");
+  asteroid2 = loadImage("assets/asteroid2.png");
 
-  // Put the avatar in the centre
-  avatarX = width/2;
-  avatarY = height/2;
+  // Put the ship in the centre
+  shipX = width/2;
+  shipY = height/2;
 
 
   // Put asteroid at random position
   asteroidX = 0;
   asteroidY = random(0,height);
+  // Put asteroid at random position
+  asteroid2X = 0;
+  asteroid2Y = random(0,height);
 }
 
 // draw()
 //
-// Handle moving the avatar and enemy and checking for dodges and
+// Handle moving the ship and enemy and checking for dodges and
 // game over situations.
 function draw() {
 
@@ -74,68 +91,96 @@ function draw() {
   if (y > height) {
     y = 0;
   }
-  // Default the avatar's velocity to 0 in case no key is pressed this frame
-  avatarVX = 0;
-  avatarVY = 0;
+  // Default the ship's velocity to 0 in case no key is pressed this frame
+  shipVX = 0;
+  shipVY = 0;
 
-  // Check which keys are down and set the avatar's velocity based on its
+  // Check which keys are down and set the ship's velocity based on its
   // speed appropriately
 
   // Left and right
   if (keyIsDown(LEFT_ARROW)) {
-    avatarVX = -avatarSpeed;
+    shipVX = -shipSpeed;
   }
   else if (keyIsDown(RIGHT_ARROW)) {
-    avatarVX = avatarSpeed;
+    shipVX = shipSpeed;
   }
 
   // Up and down (separate if-statements so you can move vertically and
   // horizontally at the same time)
   if (keyIsDown(UP_ARROW)) {
-    avatarVY = -avatarSpeed;
+    shipVY = -shipSpeed;
   }
   else if (keyIsDown(DOWN_ARROW)) {
-    avatarVY = avatarSpeed;
+    shipVY = shipSpeed;
   }
 
-  // Move the avatar according to its calculated velocity
-  avatarX = avatarX + avatarVX;
-  avatarY = avatarY + avatarVY;
+  // Move the ship according to its calculated velocity
+  shipX = shipX + shipVX;
+  shipY = shipY + shipVY;
 
 
   asteroidVX = asteroidSpeed;
   asteroidX = asteroidX + asteroidVX;
 
-  // Check if the asteroid and avatar overlap - if they do the player loses
-  // We do this by checking if the distance between the centre of the asteroid
-  // and the centre of the avatar is less that their combined radii
 
-  if (dist(asteroidX,asteroidY,avatarX,avatarY) < asteroidSize/2 + avatarSize/2) {
+  // Check if the asteroid and ship overlap - if they do the player loses
+  // We do this by checking if the distance between the centre of the asteroid
+  // and the centre of the ship is less that their combined radii
+
+  if (dist(asteroidX,asteroidY,shipX,shipY) < asteroidSize/2 + shipSize/2) {
     // Tell the player they lost
-    console.log("YOU LOSE!");
-    // Reset the enemy's position
+    // console.log("YOU LOSE!");
+    // Reset the astroid's position
     asteroidX = 0;
     asteroidY = random(0,height);
     // Reset the enemy's size and speed
     asteroidSize = 50;
     asteroidSpeed = 5;
-    // Reset the avatar's position
-    avatarX = width/2;
-    avatarY = height/2;
+    // Reset the ship's position
+    shipX = width/2;
+    shipY = height/2;
+    // Reset the dodge counter
+    dodges = 0;
+  }
+  if (dist(asteroid2X,asteroid2Y,shipX,shipY) < asteroid2Size/2 + shipSize/2) {
+    // Tell the player they lost
+    // console.log("YOU LOSE!");
+    // Reset the astroid's position
+    asteroid2X = 0;
+    asteroid2Y = random(0,height);
+    // Reset the astroid's size and speed
+    asteroid2Size = 50;
+    asteroid2Speed = 5;
+    // Reset the ship's position
+    shipX = width/2;
+    shipY = height/2;
     // Reset the dodge counter
     dodges = 0;
   }
 
-  // Check if the avatar has gone off the screen (cheating!)
-  if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
+  // Check if the ship has gone off the screen (cheating!)
+  if (shipX < 0 || shipX > width || shipY < 0 || shipY > height) {
     // If they went off the screen they lose in the same way as above.
-    console.log("YOU LOSE!");
+    // console.log("YOU LOSE!");
     asteroidX = 0;
     asteroidY = random(0,height);
     asteroidSize = 50;
     asteroidSpeed = 5;
-    avatarX = width/2;
-    avatarY = height/2;
+    shipX = width/2;
+    shipY = height/2;
+    dodges = 0;
+  }
+  // Check if the ship has gone off the screen (cheating!)
+  if (shipX < 0 || shipX > width || shipY < 0 || shipY > height) {
+    // If they went off the screen they lose in the same way as above.
+    // console.log("YOU LOSE!");
+    asteroid2X = 0;
+    asteroid2Y = random(0,height);
+    asteroid2Size = 50;
+    asteroid2Speed = 5;
+    shipX = width/2;
+    shipY = height/2;
     dodges = 0;
   }
 
@@ -152,12 +197,28 @@ function draw() {
   // // Display the current number of successful in the console
   // console.log(dodges);
 
+  // Check if the enemy has moved all the way across the screen
+  if (asteroid2X > width) {
+    // This means the player dodged so update its dodge statistic
+    dodges = dodges + 1;
+    // Tell them how many dodges they have made
+    // Reset the enemy's position to the left at a random height
+    asteroid2X = 0;
+    asteroid2Y = random(0,height);
+    // Increase the enemy's speed and size to make the game harder
+  }
 
-  // The player is black
-  fill(0);
-  // // Draw the player as a circle
-  ellipse(avatarX,avatarY,avatarSize,avatarSize);
-  //
+  if (dodges > 5 )
+  {
+    asteroid2VX = asteroid2Speed;
+    asteroid2X = asteroid2X + asteroid2VX;
+
+
+    image(asteroid2,asteroid2X,asteroid2Y);
+
+  }
+
+
 
 
 
@@ -169,6 +230,8 @@ function draw() {
 
 
 image(asteroid,asteroidX,asteroidY);
+image(ship,shipX,shipY);
+
 
 
 
