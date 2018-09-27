@@ -58,7 +58,7 @@ var star;
 
 // pre load custom font
 function preload() {
-  star = loadFont("assets/STJEDISE.ttf");
+  star = loadFont("assets/STJEDISE.TTF");
 }
 
 // setup()
@@ -139,7 +139,7 @@ function draw() {
 
 
   if ( dodges >= 1 ) {
-    shipSpeed = random (1,5,10);
+    shipSpeed
 
   }
 
