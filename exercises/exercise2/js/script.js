@@ -54,6 +54,7 @@ var bombSpeedIncrease = 1;
 
 // custom font
 var star;
+// var arial;
 
 // pre load custom font
 function preload() {
@@ -250,4 +251,13 @@ function draw() {
 // Display the astroids and the ship images
 image(asteroid,asteroidX,asteroidY);
 image(ship,shipX,shipY,shipSize);
+
+if (dodges == 10){
+    clear();
+  textFont('Arial');
+  textSize(75);
+  fill(255,0,0);
+  textAlign(CENTER);
+  text(" YOU WIN", width/2, height/2);
+}
 }
