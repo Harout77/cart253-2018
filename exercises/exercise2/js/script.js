@@ -254,7 +254,7 @@ function draw() {
 image(asteroid,asteroidX,asteroidY);
 image(ship,shipX,shipY,shipSize);
 
-if (dodges == 2){
+if (dodges == 10){
   background(space);
   textFont('Arial');
   textSize(75);
