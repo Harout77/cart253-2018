@@ -13,7 +13,10 @@ var shipY;
 var shipSize = 50;
 
 // The speed and velocity of our ship circle
+var shipSpeed = 1;
+var shipSpeed = 5;
 var shipSpeed = 10;
+
 var shipVX = 0;
 var shipVY = 0;
 
@@ -44,10 +47,10 @@ var asteroid2Y;
 var asteroid2Size = 50;
 
 // asteroid2 speed and velocity
-var asteroid2Speed = 11;
+var asteroid2Speed = 16;
 var asteroid2VX = 0;
 var asteroid2VY = 0;
-var astroid2SpeedIncrease = 0.5;
+var astroid2SpeedIncrease = 1;
 
 
 // custom font
@@ -129,9 +132,16 @@ function draw() {
   shipX = shipX + shipVX;
   shipY = shipY + shipVY;
 
-
+ // astroid velocity speed
   asteroidVX = asteroidSpeed;
   asteroidX = asteroidX + asteroidVX;
+
+
+
+  if ( dodges >= 1 ) {
+    shipSpeed = random (1,5,10);
+
+  }
 
 
   // Check if the asteroid and ship overlap - if they do the player loses
@@ -210,26 +220,27 @@ function draw() {
   // console.log(dodges);
 
   // Check if the astroid has moved all the way across the screen
-  if (asteroid2X > width) {
-    // This means the player dodged so update its dodge statistic
-    dodges = dodges + 1;
-    // Tell them how many dodges they have made
-    // Reset the astroids's position to the left at a random height
-    asteroid2X = 0;
-    asteroid2Y = random(0,height);
-
-    // Increase the astroids's speed and size to make the game harder
-    asteroidSpeed = asteroidSpeed + astroid2SpeedIncrease;
-  }
 
   // adding the second asteroid if the score is above 5
-  if (dodges > 5 )
+  if (dodges >= 5 )
   {
+    image(asteroid2,asteroid2X,asteroid2Y);
+
     asteroid2VX = asteroid2Speed;
     asteroid2X = asteroid2X + asteroid2VX;
-    image(asteroid2,asteroid2X,asteroid2Y);
-  }
+    if ( asteroidX && asteroid2X  > width) {
+      // This means the player dodged so update its dodge statistic
+      // dodges = dodges + 1;
+      // Tell them how many dodges they have made
+      // Reset the astroids's position to the left at a random height
+      asteroid2X = 0;
+      asteroid2Y = random(0,height);
 
+      // Increase the astroids's speed and size to make the game harder
+      asteroid2Speed = asteroid2Speed + astroid2SpeedIncrease;
+    }
+
+  }
 
 
 
