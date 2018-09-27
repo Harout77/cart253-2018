@@ -51,7 +51,8 @@ var bombVX = 0;
 var bombVY = 0;
 var bombSpeedIncrease = 1;
 
-
+//custom sound
+var spaceloop;
 // custom font
 var star;
 
@@ -61,6 +62,8 @@ var win = "You Win";
 // pre load custom font
 function preload() {
   star = loadFont("assets/STJEDISE.TTF");
+  soundFormats('mp3', 'ogg');
+  spaceloop = loadSound('assets/spaceloop.mp3');
 }
 
 // setup()
@@ -69,6 +72,8 @@ function preload() {
 function setup() {
   // Create our playing area
   createCanvas(windowWidth,windowHeight);
+  spaceloop.setVolume(0.5);
+  spaceloop.play();
 
   // Loading assets
   space = loadImage("assets/space.jpg");
@@ -212,7 +217,7 @@ function draw() {
 
     // Ship speed and size randomizer at every score
      shipSpeedRandom = random (-10,20);
-     shipSizeRandom = random (-100,50);
+     shipSizeRandom = random (-10,20);
      // This is where the speed and size changes at every score
      shipSpeed = shipSpeed + shipSpeedRandom ;
      shipSize = shipSize + shipSizeRandom ;
@@ -220,7 +225,7 @@ function draw() {
 
     // Limit the speed and size randomizer ;
      shipSpeed = constrain(shipSpeed,10,20);
-     shipSizeRandom = constrain(shipSize,50,50);
+     shipSizeRandom = constrain(shipSize,10,20);
 
   }
 
