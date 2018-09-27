@@ -40,16 +40,16 @@ var asteroidVY = 0;
 var astroidSpeedIncrease = 0.5;
 
 // The position and size of the astroids2
-var asteroid2;
-var asteroid2X;
-var asteroid2Y;
-var asteroid2Size = 50;
+var bomb;
+var bombX;
+var bombY;
+var bombSize = 50;
 
-// asteroid2 speed and velocity
-var asteroid2Speed = 16;
-var asteroid2VX = 0;
-var asteroid2VY = 0;
-var astroid2SpeedIncrease = 1;
+// bomb speed and velocity
+var bombSpeed = 16;
+var bombVX = 0;
+var bombVY = 0;
+var bombSpeedIncrease = 1;
 
 
 // custom font
@@ -71,7 +71,7 @@ function setup() {
   space = loadImage("assets/space.jpg");
   asteroid = loadImage("assets/asteroid.png");
   ship = loadImage("assets/ship.png");
-  asteroid2 = loadImage("assets/asteroid2.png");
+  bomb = loadImage("assets/bomb.png");
 
   // Put the ship in the centre
   shipX = width/2;
@@ -82,8 +82,8 @@ function setup() {
   asteroidX = 0;
   asteroidY = random(0,height);
   // Put asteroid at random position
-  asteroid2X = 0;
-  asteroid2Y = random(0,height);
+  bombX = 0;
+  bombY = random(0,height);
 }
 
 // draw()
@@ -155,15 +155,15 @@ function draw() {
     // Reset the dodge counter
     dodges = 0;
   }
-  if (dist(asteroid2X,asteroid2Y,shipX,shipY) < asteroid2Size/2 + shipSize/2) {
+  if (dist(bombX,bombY,shipX,shipY) < bombSize/2 + shipSize/2) {
     // Tell the player they lost
     // console.log("YOU LOSE!");
     // Reset the astroid's position
-    asteroid2X = 0;
-    asteroid2Y = random(0,height);
+    bombX = 0;
+    bombY = random(0,height);
     // Reset the astroid's size and speed
-    asteroid2Size = 50;
-    asteroid2Speed = 5;
+    bombSize = 50;
+    bombSpeed = 5;
     // Reset the ship's position
     shipX = width/2;
     shipY = height/2;
@@ -187,10 +187,10 @@ function draw() {
   if (shipX < 0 || shipX > width || shipY < 0 || shipY > height) {
     // If they went off the screen they lose in the same way as above.
     // console.log("YOU LOSE!");
-    asteroid2X = 0;
-    asteroid2Y = random(0,height);
-    asteroid2Size = 50;
-    asteroid2Speed = 5;
+    bombX = 0;
+    bombY = random(0,height);
+    bombSize = 50;
+    bombSpeed = 5;
     shipX = width/2;
     shipY = height/2;
     dodges = 0;
@@ -218,26 +218,28 @@ function draw() {
     // Limit the speed and size randomizer ;
      shipSpeed = constrain(shipSpeed,10,20);
      shipSizeRandom = constrain(shipSize,50,100);
+
   }
 
-  // Adding the second asteroid if the score is 5 and above
+  // Adding a bomb obstacle if the score is 5 and above
   if (dodges >= 5 )
   {
-    image(asteroid2,asteroid2X,asteroid2Y);
-    asteroid2VX = asteroid2Speed;
-    asteroid2X = asteroid2X + asteroid2VX;
-    if ( asteroidX && asteroid2X  > width) {
+    image(bomb,bombX,bombY);
+    bombVX = bombSpeed;
+    bombX = bombX + bombVX;
+    if ( asteroidX && bombX  > width) {
       // This means the player dodged so update its dodge statistic
       // dodges = dodges + 1;
       // Tell them how many dodges they have made
       // Reset the astroids's position to the left at a random height
-      asteroid2X = 0;
-      asteroid2Y = random(0,height);
+      bombX = 0;
+      bombY = random(0,height);
 
       // Increase the astroids's speed and size to make the game harder
-      asteroid2Speed = asteroid2Speed + astroid2SpeedIncrease;
+      bombSpeed = bombSpeed + bombSpeedIncrease;
     }
   }
+
  //Display score
   textFont(star);
   textSize(75);
