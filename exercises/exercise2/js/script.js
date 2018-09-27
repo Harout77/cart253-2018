@@ -10,16 +10,15 @@ Starter code for exercise 2.
 var ship;
 var shipX;
 var shipY;
-var shipSize = 50;
+var shipSize = 100;
+var shipSizeRandom;
 
 // The speed and velocity of our ship circle
-var shipSpeed = 1;
-var shipSpeed = 5;
-var shipSpeed = 10;
 
+var shipSpeed = 10;
 var shipVX = 0;
 var shipVY = 0;
-
+var shipSpeedRandom ;
 
 // How many dodges the player has made
 var dodges = 0;
@@ -137,13 +136,6 @@ function draw() {
   asteroidX = asteroidX + asteroidVX;
 
 
-
-  if ( dodges >= 1 ) {
-    shipSpeed
-
-  }
-
-
   // Check if the asteroid and ship overlap - if they do the player loses
   // We do this by checking if the distance between the centre of the asteroid
   // and the centre of the ship is less that their combined radii
@@ -215,17 +207,23 @@ function draw() {
     // Increase the astroid's speed and size to make the game harder
     asteroidSpeed = asteroidSpeed + astroidSpeedIncrease;
 
+    // Ship speed and size randomizer at every score
+     shipSpeedRandom = random (-10,20);
+     shipSizeRandom = random (-100,100);
+     // This is where the speed and size changes at every score
+     shipSpeed = shipSpeed + shipSpeedRandom ;
+     shipSize = shipSize + shipSizeRandom ;
+
+
+    // Limit the speed and size randomizer ;
+     shipSpeed = constrain(shipSpeed,10,20);
+     shipSizeRandom = constrain(shipSize,50,100);
   }
-  // // Display the current number of successful in the console
-  // console.log(dodges);
 
-  // Check if the astroid has moved all the way across the screen
-
-  // adding the second asteroid if the score is above 5
+  // Adding the second asteroid if the score is 5 and above
   if (dodges >= 5 )
   {
     image(asteroid2,asteroid2X,asteroid2Y);
-
     asteroid2VX = asteroid2Speed;
     asteroid2X = asteroid2X + asteroid2VX;
     if ( asteroidX && asteroid2X  > width) {
@@ -239,12 +237,7 @@ function draw() {
       // Increase the astroids's speed and size to make the game harder
       asteroid2Speed = asteroid2Speed + astroid2SpeedIncrease;
     }
-
   }
-
-
-
-
  //Display score
   textFont(star);
   textSize(75);
@@ -252,12 +245,7 @@ function draw() {
   textAlign(CENTER);
   text("Score " + dodges, width/2, height/8);
 
-
-
+// Display the astroids and the ship images
 image(asteroid,asteroidX,asteroidY);
-image(ship,shipX,shipY);
-
-
-
-
+image(ship,shipX,shipY,shipSize);
 }
