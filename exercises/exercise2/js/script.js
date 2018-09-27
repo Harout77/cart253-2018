@@ -1,9 +1,8 @@
 /*********************************************************
 
 Exercise 2 - The Artful Dodger V2.0
-Harout Kullukian
-Starter code for exercise 2.
-
+Harout Kullukian      Thursday,September 27,2018
+ASTROID DODGER
 *********************************************************/
 
 // The position and size of our ship circle
@@ -62,7 +61,8 @@ var win = "You Win";
 // pre load custom font
 function preload() {
   star = loadFont("assets/STJEDISE.TTF");
-  soundFormats('mp3', 'ogg');
+  // load the music file
+  soundFormats('mp3');
   spaceloop = loadSound('assets/spaceloop.mp3');
 }
 
@@ -70,8 +70,10 @@ function preload() {
 //
 // Make the canvas, position the ship and anemy
 function setup() {
-  // Create our playing area
+  // Create our playing area ful screen
   createCanvas(windowWidth,windowHeight);
+
+  // Play the music and make it loop
   spaceloop.setVolume(0.5);
   spaceloop.play();
 
@@ -84,8 +86,6 @@ function setup() {
   // Put the ship in the centre
   shipX = width/2;
   shipY = height/2;
-
-
   // Put asteroid at random position
   asteroidX = 0;
   asteroidY = random(0,height);
@@ -93,7 +93,6 @@ function setup() {
   bombX = 0;
   bombY = random(0,height);
 }
-
 // draw()
 //
 // Handle moving the ship and enemy and checking for dodges and
@@ -101,9 +100,7 @@ function setup() {
 function draw() {
 
   // placing the background image
-
   background(space);
-
   stroke(226, 204, 0);
   line(0, y, width, y);
 
@@ -221,12 +218,9 @@ function draw() {
      // This is where the speed and size changes at every score
      shipSpeed = shipSpeed + shipSpeedRandom ;
      shipSize = shipSize + shipSizeRandom ;
-
-
     // Limit the speed and size randomizer ;
      shipSpeed = constrain(shipSpeed,10,20);
      shipSizeRandom = constrain(shipSize,10,20);
-
   }
 
   // Adding a bomb obstacle if the score is 5 and above
@@ -259,6 +253,7 @@ function draw() {
 image(asteroid,asteroidX,asteroidY);
 image(ship,shipX,shipY,shipSize);
 
+// Display the "YOU WIN" SCREEN WITH RESTART OPTION
 if (dodges == 10){
   background(space);
   textFont('Arial');
@@ -274,6 +269,4 @@ if (dodges == 10){
   dodges = 0;
   }
 }
-
-
 }
