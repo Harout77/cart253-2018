@@ -54,7 +54,9 @@ var bombSpeedIncrease = 1;
 
 // custom font
 var star;
-// var arial;
+
+// win screen
+var win = "You Win";
 
 // pre load custom font
 function preload() {
@@ -210,7 +212,7 @@ function draw() {
 
     // Ship speed and size randomizer at every score
      shipSpeedRandom = random (-10,20);
-     shipSizeRandom = random (-100,100);
+     shipSizeRandom = random (-100,50);
      // This is where the speed and size changes at every score
      shipSpeed = shipSpeed + shipSpeedRandom ;
      shipSize = shipSize + shipSizeRandom ;
@@ -218,7 +220,7 @@ function draw() {
 
     // Limit the speed and size randomizer ;
      shipSpeed = constrain(shipSpeed,10,20);
-     shipSizeRandom = constrain(shipSize,50,100);
+     shipSizeRandom = constrain(shipSize,50,50);
 
   }
 
@@ -252,12 +254,21 @@ function draw() {
 image(asteroid,asteroidX,asteroidY);
 image(ship,shipX,shipY,shipSize);
 
-if (dodges == 10){
-    clear();
+if (dodges == 2){
+  background(space);
   textFont('Arial');
   textSize(75);
-  fill(255,0,0);
+  fill(255,255,255);
   textAlign(CENTER);
-  text(" YOU WIN", width/2, height/2);
+  text(win, width/2, height/2);
+  textSize(40);
+  fill(255,255,255);
+  textAlign(CENTER);
+  text("Press Escape to Replay the game ", width/2, height/1.5);
+  if (keyIsDown(ESCAPE)) {
+  dodges = 0;
+  }
 }
+
+
 }
