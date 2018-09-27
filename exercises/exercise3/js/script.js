@@ -52,6 +52,8 @@ function preload() {
   decoyImage10 = loadImage("assets/images/animals-10.png");
 }
 
+
+
 // setup()
 //
 // Creates the canvas, sets basic modes, draws correct number
@@ -59,10 +61,18 @@ function preload() {
 function setup() {
   createCanvas(windowWidth,windowHeight);
   background("#ffff00");
+
   imageMode(CENTER);
 
+
+
+// image search box
+
+
+
+
   // Use a for loop to draw as many decoys as we need
-  for (var i = 0; i < numDecoys; i++) {
+  /* for (var i = 0; i < numDecoys; i++) {
     // Choose a random location for this decoy
     var x = random(0,width);
     var y = random(0,height);
@@ -102,15 +112,30 @@ function setup() {
       image(decoyImage10,x,y);
     }
   }
+  */
 
   // Once we've displayed all decoys, we choose a location for the target
+
+
+
   targetX = random(0,width);
   targetY = random(0,height);
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
+
 }
 
+
 function draw() {
+
+searchBox();
+
+function searchBox() {
+    fill(255,0,0);
+  rect (windowWidth - 230,10,200,200);
+  image(targetImage, windowWidth - 100, 60);
+}
+
   if (gameOver) {
     // Prepare our typography
     textFont("Helvetica");
