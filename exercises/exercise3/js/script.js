@@ -1,6 +1,6 @@
 /******************************************************************************
-Where's Sausage Dog?
-by Pippin Barr
+Where's Sausage Dog 2.0?
+by Harout Kullukian
 
 An algorithmic version of a Where's Wally searching game where you
 need to click on the sausage dog you're searching for in amongst all
@@ -14,6 +14,13 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 var targetX;
 var targetY;
 var targetImage;
+
+//velocity
+var vx;
+var vy;
+var speedChange = 1;
+var maxSpeed = 2;
+var radius = 100;
 
 // The ten decoy images
 var decoyImage1;
@@ -29,7 +36,7 @@ var decoyImage10;
 
 // The number of decoys to show on the screen, randomly
 // chosen from the decoy images
-var numDecoys = 100;
+var numDecoys = 10;
 
 // Keep track of whether they've won
 var gameOver = false;
@@ -51,7 +58,7 @@ function preload() {
   decoyImage9 = loadImage("assets/images/animals-09.png");
   decoyImage10 = loadImage("assets/images/animals-10.png");
 }
-
+      //searchbox function
       function searchBox() {
       //draw the searchbox
       fill(0,255,0);
@@ -84,7 +91,7 @@ function preload() {
 
 
   // Use a for loop to draw as many decoys as we need
-  /* for (var i = 0; i < numDecoys; i++) {
+   for (var i = 0; i < numDecoys; i++) {
     // Choose a random location for this decoy
     var x = random(0,width);
     var y = random(0,height);
@@ -124,7 +131,7 @@ function preload() {
       image(decoyImage10,x,y);
     }
   }
-  */
+
 
   // Once we've displayed all decoys, we choose a location for the target
 
@@ -139,6 +146,10 @@ function preload() {
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
 
+  //setting the winning  annimation
+  vx = 0;
+  vy = 0;
+
 }
 
 
@@ -149,6 +160,8 @@ function draw() {
 
 
   if (gameOver) {
+    // clear the decoys
+    background('#ffff00')
     // Prepare our typography
     textFont("Helvetica");
     textSize(128);
@@ -156,12 +169,17 @@ function draw() {
     noStroke();
     fill(random(255));
     // Tell them they won!
-    text("YOU WINNED!",width/2,height/2);
-
+    text("YASS YOU FOUND ME!!!!!",width/2,height/2);
     noFill();
     stroke(random(255));
     strokeWeight(10);
-    ellipse(targetX,targetY,targetImage.width,targetImage.height);
+    ellipse(targetX,targetY,targetImage.width,targetImage.height, radius * 2);
+
+    vx += random(-speedChange,speedChange);
+    vy += random(-speedChange,speedChange);
+    targetX += vx;
+    targetY += vy;
+
   }
 }
 
