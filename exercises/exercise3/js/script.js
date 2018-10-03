@@ -1,6 +1,6 @@
 /******************************************************************************
-Where's Sausage Dog v2.0 ?
-by Harout Kullukian
+Where's Sausage Dog?
+by Pippin Barr
 
 An algorithmic version of a Where's Wally searching game where you
 need to click on the sausage dog you're searching for in amongst all
@@ -14,8 +14,6 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 var targetX;
 var targetY;
 var targetImage;
-
-var searchText = " FIND ME";
 
 // The ten decoy images
 var decoyImage1;
@@ -55,15 +53,9 @@ function preload() {
 }
 
     function searchBox() {
-      fill(0,255,0);
-      rect(width-240,2,220,150);
-      //draw doggo inside rectangle
-      image(targetImage,width-100,50);
-      //some flavor text
-     fill(0,0,0);
-     textSize(32);
-     textAlign(LEFT,CENTER);
-     text('Find Me',width-190,125);
+      fill(255,0,0);
+      rect (windowWidth - 230,0,400,200);
+      image(targetImage, windowWidth - 100, 60);
     }
 
 // setup()
@@ -78,10 +70,13 @@ function preload() {
 
 
 
+// image search box
+
+
 
 
   // Use a for loop to draw as many decoys as we need
-   for (var i = 0; i < numDecoys; i++) {
+  /* for (var i = 0; i < numDecoys; i++) {
     // Choose a random location for this decoy
     var x = random(0,width);
     var y = random(0,height);
@@ -121,7 +116,7 @@ function preload() {
       image(decoyImage10,x,y);
     }
   }
-
+  */
 
   // Once we've displayed all decoys, we choose a location for the target
 
