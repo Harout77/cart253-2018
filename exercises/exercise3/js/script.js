@@ -52,13 +52,17 @@ function preload() {
   decoyImage10 = loadImage("assets/images/animals-10.png");
 }
 
-
+    function searchBox() {
+      fill(255,0,0);
+      rect (windowWidth - 230,0,400,200);
+      image(targetImage, windowWidth - 100, 60);
+    }
 
 // setup()
 //
 // Creates the canvas, sets basic modes, draws correct number
 // of decoys in random positions, then the target
-function setup() {
+  function setup() {
   createCanvas(windowWidth,windowHeight);
   background("#ffff00");
 
@@ -116,10 +120,14 @@ function setup() {
 
   // Once we've displayed all decoys, we choose a location for the target
 
-
-
   targetX = random(0,width);
   targetY = random(0,height);
+
+  // Prevent the target to spawn inder the searchbox
+    while (targetX > windowWidth - 250 && targetY < 300){
+     targetX = random(0,width);
+     targetY = random(0,height);
+   }
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
 
@@ -128,13 +136,9 @@ function setup() {
 
 function draw() {
 
-searchBox();
+  searchBox();
 
-function searchBox() {
-    fill(255,0,0);
-  rect (windowWidth - 230,10,200,200);
-  image(targetImage, windowWidth - 100, 60);
-}
+
 
   if (gameOver) {
     // Prepare our typography
