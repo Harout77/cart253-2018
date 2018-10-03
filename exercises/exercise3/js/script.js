@@ -52,11 +52,19 @@ function preload() {
   decoyImage10 = loadImage("assets/images/animals-10.png");
 }
 
-    function searchBox() {
-      fill(255,0,0);
-      rect (windowWidth - 230,0,400,200);
-      image(targetImage, windowWidth - 100, 60);
+      function searchBox() {
+      //draw the searchbox
+      fill(0,255,0);
+      rect(width-240,2,220,150);
+      //Insert the target image inside the rectangle
+      image(targetImage,width-100,50);
+      // Insert text
+      fill(0,0,0);
+      textSize(32);
+      textAlign(LEFT,CENTER);
+      text('Find Me',width-190,125);
     }
+
 
 // setup()
 //
