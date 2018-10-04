@@ -47,6 +47,9 @@ var numDecoysMax  = 500
 // Keep track of whether they've won
 var gameOver = false;
 
+//custom sound
+var win;
+
 // preload()
 //
 // Loads the target and decoy images before the program starts
@@ -63,6 +66,8 @@ function preload() {
   decoyImage8 = loadImage("assets/images/animals-08.png");
   decoyImage9 = loadImage("assets/images/animals-09.png");
   decoyImage10 = loadImage("assets/images/animals-10.png");
+  soundFormats('wav');
+  win = loadSound('assets/win.wav');
 }
       //searchbox function
       function searchBox() {
@@ -180,7 +185,8 @@ function draw() {
     vy += random(-speedChange,speedChange);
     targetX += vx;
     targetY += vy;
-
+    win.setVolume(1);
+    win.play();
   }
 }
 // mousePressed()
