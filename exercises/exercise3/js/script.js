@@ -36,8 +36,14 @@ var decoyImage10;
 
 // The number of decoys to show on the screen, randomly
 // chosen from the decoy images
-var numDecoys = 10;
+var numDecoys ;
+var numDecoysMin  = 50;
+var numDecoysMax  = 500
 
+// randomizer
+  function randomizer() {
+  numDecoys = random(numDecoysMin,numDecoysMax);
+}
 // Keep track of whether they've won
 var gameOver = false;
 
@@ -83,13 +89,8 @@ function preload() {
 
   imageMode(CENTER);
 
-
-
-// image search box
-
-
-
-
+    // Make the decoys random at each refresh
+    randomizer();
   // Use a for loop to draw as many decoys as we need
    for (var i = 0; i < numDecoys; i++) {
     // Choose a random location for this decoy
@@ -182,7 +183,6 @@ function draw() {
 
   }
 }
-
 // mousePressed()
 //
 // Checks if the player clicked on the target and if so tells them they won
