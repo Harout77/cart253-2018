@@ -41,14 +41,14 @@ var numDecoysMin  = 50;
 var numDecoysMax  = 500
 
 // randomizer
-  function randomizer() {
+function randomizer() {
   numDecoys = random(numDecoysMin,numDecoysMax);
 }
 // Keep track of whether they've won
 var gameOver = false;
 
 //custom sound
-var win;
+var win = new Audio("assets/win.wav");
 
 // preload()
 //
@@ -66,38 +66,65 @@ function preload() {
   decoyImage8 = loadImage("assets/images/animals-08.png");
   decoyImage9 = loadImage("assets/images/animals-09.png");
   decoyImage10 = loadImage("assets/images/animals-10.png");
-  soundFormats('wav');
-  win = loadSound('assets/win.wav');
+
+  //preload the audio
+  win = new Audio("assets/win.wav");
+
 }
-      //searchbox function
-      function searchBox() {
-      //draw the searchbox
-      fill(0,255,0);
-      rect(width-240,2,220,150);
-      //Insert the target image inside the rectangle
-      image(targetImage,width-100,50);
-      // Insert text
-      fill(0,0,0);
-      textSize(32);
-      textAlign(LEFT,CENTER);
-      text('Find Me',width-190,125);
-    }
-
-
 // setup()
 //
 // Creates the canvas, sets basic modes, draws correct number
 // of decoys in random positions, then the target
-  function setup() {
+function setup() {
   createCanvas(windowWidth,windowHeight);
+  reset();
+}
+
+
+
+function draw() {
+
+  searchBox();
+
+
+
+  if (gameOver) {
+    // clear the decoys
+    background('#ffff00')
+    // Prepare our typography
+    textFont("Helvetica");
+    textSize(128);
+    textAlign(CENTER,CENTER);
+    noStroke();
+    fill(random(255));
+    // Tell them they won!
+    text("YASS YOU FOUND ME!!!!!",width/2,height/2);
+    noFill();
+    stroke(random(255));
+    strokeWeight(10);
+    ellipse(targetX,targetY,targetImage.width,targetImage.height, radius * 2);
+
+    vx += random(-speedChange,speedChange);
+    vy += random(-speedChange,speedChange);
+    targetX += vx;
+    targetY += vy;
+    win.play();
+
+    if (keyIsPressed === true) {
+      reset();
+    }
+  }
+}
+
+function reset() {
   background("#ffff00");
 
   imageMode(CENTER);
 
-    // Make the decoys random at each refresh
-    randomizer();
+  // Make the decoys random at each refresh
+  randomizer();
   // Use a for loop to draw as many decoys as we need
-   for (var i = 0; i < numDecoys; i++) {
+  for (var i = 0; i < numDecoys; i++) {
     // Choose a random location for this decoy
     var x = random(0,width);
     var y = random(0,height);
@@ -145,50 +172,29 @@ function preload() {
   targetY = random(0,height);
 
   // Prevent the target to spawn inder the searchbox
-    while (targetX > windowWidth - 250 && targetY < 300){
-     targetX = random(0,width);
-     targetY = random(0,height);
-   }
+  while (targetX > windowWidth - 250 && targetY < 300){
+    targetX = random(0,width);
+    targetY = random(0,height);
+  }
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
 
-  //setting the winning  annimation
-  vx = 0;
-  vy = 0;
-
+  gameOver = false ;
+}
+//searchbox function
+function searchBox() {
+  //draw the searchbox
+  fill(0,255,0);
+  rect(width-240,2,220,150);
+  //Insert the target image inside the rectangle
+  image(targetImage,width-100,50);
+  // Insert text
+  fill(0,0,0);
+  textSize(32);
+  textAlign(LEFT,CENTER);
+  text('Find Me',width-190,125);
 }
 
-
-function draw() {
-
-  searchBox();
-
-
-
-  if (gameOver) {
-    // clear the decoys
-    background('#ffff00')
-    // Prepare our typography
-    textFont("Helvetica");
-    textSize(128);
-    textAlign(CENTER,CENTER);
-    noStroke();
-    fill(random(255));
-    // Tell them they won!
-    text("YASS YOU FOUND ME!!!!!",width/2,height/2);
-    noFill();
-    stroke(random(255));
-    strokeWeight(10);
-    ellipse(targetX,targetY,targetImage.width,targetImage.height, radius * 2);
-
-    vx += random(-speedChange,speedChange);
-    vy += random(-speedChange,speedChange);
-    targetX += vx;
-    targetY += vy;
-    win.setVolume(1);
-    win.play();
-  }
-}
 // mousePressed()
 //
 // Checks if the player clicked on the target and if so tells them they won
