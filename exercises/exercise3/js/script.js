@@ -78,8 +78,6 @@ function preload() {
 function setup() {
   createCanvas(windowWidth,windowHeight);
   reset();
-
-
 }
 
 function draw() {
@@ -96,11 +94,6 @@ function draw() {
     fill(random(255));
     // Tell them they won!
     text("YASS YOU FOUND ME!!!!!",width/2,height/2);
-    noFill();
-    stroke(random(255));
-    strokeWeight(10);
-    ellipse(targetX,targetY,targetImage.width,targetImage.height, radius * 2);
-
     //text bottom to replay
     textFont("Helvetica");
     textSize(72);
@@ -112,13 +105,20 @@ function draw() {
     noFill();
     stroke(random(255));
     strokeWeight(10);
+    noFill();
+    stroke(random(255));
+    strokeWeight(10);
+    ellipse(targetX,targetY,targetImage.width,targetImage.height, radius * 2);
 
-    vx += random(-speedChange,speedChange);
-    vy += random(-speedChange,speedChange);
-    targetX += vx;
-    targetY += vy;
+        vx += random(-speedChange,speedChange);
+        vy += random(-speedChange,speedChange);
+        targetX += vx;
+        targetY += vy;
+
+    // play the win song
     win.play();
 
+    //reset button action
     if (keyIsPressed === true) {
       location.reload();    }
   }
@@ -185,10 +185,12 @@ function reset() {
   }
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
+  //setting the winning  annimation
+  vx = 0;
+  vy = 0;
 
+//prevent from auto ending game
   gameOver = false ;
-searchBox();
-
 }
 //searchbox function
 function searchBox() {
