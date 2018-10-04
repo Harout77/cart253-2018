@@ -78,14 +78,11 @@ function preload() {
 function setup() {
   createCanvas(windowWidth,windowHeight);
   reset();
+
+
 }
 
-
-
 function draw() {
-
-  searchBox();
-
 
 
   if (gameOver) {
@@ -104,6 +101,18 @@ function draw() {
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height, radius * 2);
 
+    //text bottom to replay
+    textFont("Helvetica");
+    textSize(72);
+    textAlign(CENTER,CENTER);
+    noStroke();
+    fill(random(255));
+    // Tell them they won!
+    text("PRESS ANY KEY TO CONTINUE",width/2 ,height/1.5);
+    noFill();
+    stroke(random(255));
+    strokeWeight(10);
+
     vx += random(-speedChange,speedChange);
     vy += random(-speedChange,speedChange);
     targetX += vx;
@@ -111,11 +120,11 @@ function draw() {
     win.play();
 
     if (keyIsPressed === true) {
-      reset();
-    }
+      location.reload();    }
   }
 }
 
+// this sets up the game and also resets it
 function reset() {
   background("#ffff00");
 
@@ -164,8 +173,6 @@ function reset() {
       image(decoyImage10,x,y);
     }
   }
-
-
   // Once we've displayed all decoys, we choose a location for the target
 
   targetX = random(0,width);
@@ -180,6 +187,8 @@ function reset() {
   image(targetImage,targetX,targetY);
 
   gameOver = false ;
+searchBox();
+
 }
 //searchbox function
 function searchBox() {
@@ -193,6 +202,7 @@ function searchBox() {
   textSize(32);
   textAlign(LEFT,CENTER);
   text('Find Me',width-190,125);
+
 }
 
 // mousePressed()
