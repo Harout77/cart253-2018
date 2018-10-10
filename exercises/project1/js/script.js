@@ -49,13 +49,17 @@ var eatHealth = 10;
 // Number of bones eaten during the game
 var bonesEaten = 0;
 
+// halloween background image, font and sound
 var backgroundimage;
+var halloweenFont;
 
 function preload() {
   ghost = loadImage("assets/images/ghost.png");
   bones = loadImage("assets/images/bones.png");
   backgroundimage = loadImage("assets/images/background.jpg");
-}
+  halloweenFont = loadFont("assets/halloween.ttf");
+
+  }
 
 // setup()
 //
@@ -291,9 +295,12 @@ function drawghost() {
 //
 // Display text about the game being over!
 function showGameOver() {
-  textSize(32);
+  textFont(halloweenFont);
+  textSize(64);
   textAlign(CENTER,CENTER);
-  fill(0);
+  fill(255,165,0);
+  strokeWeight(4);
+  stroke(255,165,0);
   var gameOverText = "GAME OVER\n";
   gameOverText += "You ate " + bonesEaten + " bones\n";
   gameOverText += "before you died."
