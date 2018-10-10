@@ -81,6 +81,7 @@ function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
   playerHealth = playerMaxHealth;
+
 }
 
 // draw()
@@ -135,14 +136,19 @@ function handleInput() {
   else {
     playerVY = 0;
   }
+  sprint();
+
+}
+function sprint() {
+  // Srpint ability while pressing the space bar
   if (keyIsDown(32)) {
     playerMaxSpeed = 10;
   }
   else {
     playerMaxSpeed = 2;
   }
-
 }
+
 
 // movePlayer()
 //
