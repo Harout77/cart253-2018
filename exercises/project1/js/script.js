@@ -136,16 +136,17 @@ function handleInput() {
   else {
     playerVY = 0;
   }
-  sprint();
-
 }
 function sprint() {
   // Srpint ability while pressing the space bar
   if (keyIsDown(32)) {
     playerMaxSpeed = 10;
+    playerHealth = constrain(playerHealth -1,0,playerMaxHealth);
+
   }
   else {
     playerMaxSpeed = 2;
+
   }
 }
 
@@ -173,6 +174,8 @@ function movePlayer() {
   else if (playerY > height) {
     playerY -= height;
   }
+  sprint();
+
 }
 
 // updateHealth()
