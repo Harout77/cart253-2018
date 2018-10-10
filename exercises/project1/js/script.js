@@ -135,6 +135,13 @@ function handleInput() {
   else {
     playerVY = 0;
   }
+  if (keyIsDown(32)) {
+    playerMaxSpeed = 10;
+  }
+  else {
+    playerMaxSpeed = 2;
+  }
+
 }
 
 // movePlayer()
