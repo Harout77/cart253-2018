@@ -27,58 +27,62 @@ var ghostMaxHealth = 255;
 // ghost fill color
 var ghostFill = 50;
 
-// Prey position, size, velocity
-var prey;
-var preyX;
-var preyY;
-var preytX;
-var preytY;
-var preyRadius = 25;
-var preyVX;
-var preyVY;
-var preyMaxSpeed = 4;
+// bones position, size, velocity
+var bones;
+var bonesX;
+var bonesY;
+var bonestX;
+var bonestY;
+var bonesRadius = 25;
+var bonesVX;
+var bonesVY;
+var bonesMaxSpeed = 4;
 
-// Prey health
-var preyHealth;
-var preyMaxHealth = 100;
-// Prey fill color
-var preyFill = 200;
+// bones health
+var bonesHealth;
+var bonesMaxHealth = 100;
+// bones fill color
+var bonesFill = 200;
 
-// Amount of health obtained per frame of "eating" the prey
+// Amount of health obtained per frame of "eating" the bones
 var eatHealth = 10;
-// Number of prey eaten during the game
-var preyEaten = 0;
+// Number of bones eaten during the game
+var bonesEaten = 0;
+
+var backgroundimage;
 
 function preload() {
   ghost = loadImage("assets/images/ghost.png");
-  prey = loadImage("assets/images/bones.png");
+  bones = loadImage("assets/images/bones.png");
+  backgroundimage = loadImage("assets/images/background.jpg");
 }
 
 // setup()
 //
 // Sets up the basic elements of the game
 function setup() {
-  createCanvas(500,500);
+  createCanvas(1000,700);
+
 
   noStroke();
 
-  setupPrey();
+  setupbones();
   setupghost();
 }
 
-// setupPrey()
+// setupbones()
 //
-// Initialises prey's position, velocity, and health
-function setupPrey() {
+// Initialises bones's position, velocity, and health
+function setupbones() {
 
-  preyVX = -preyMaxSpeed;
-  preyVY = preyMaxSpeed;
-  preyHealth = preyMaxHealth;
+  bonesVX = -bonesMaxSpeed;
+  bonesVY = bonesMaxSpeed;
+  bonesHealth = bonesMaxHealth;
 
-  preytX = random(0,1000);
-  preytY = random(0,1000);
-  preyX = width/5;
-  preyY = height/5;
+  bonestX = random(0,1000);
+  bonestY = random(0,1000);
+  bonesX = width/5;
+  bonesY = height/5;
 
 }
 
@@ -95,23 +99,23 @@ function setupghost() {
 // draw()
 //
 // While the game is active, checks input
-// updates positions of prey and ghost,
+// updates positions of bones and ghost,
 // checks health (dying), checks eating (overlaps)
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(100,100,200);
+  background(backgroundimage);
 
   if (!gameOver) {
     handleInput();
 
     moveghost();
-    movePrey();
+    movebones();
 
     updateHealth();
     checkEating();
 
-    drawPrey();
+    drawbones();
     drawghost();
   }
   else {
@@ -202,74 +206,74 @@ function updateHealth() {
 
 // checkEating()
 //
-// Check if the ghost overlaps the prey and updates health of both
+// Check if the ghost overlaps the bones and updates health of both
 function checkEating() {
-  // Get distance of ghost to prey
-  var d = dist(ghostX,ghostY,preyX,preyY);
+  // Get distance of ghost to bones
+  var d = dist(ghostX,ghostY,bonesX,bonesY);
   // Check if it's an overlap
-  if (d < ghostRadius + preyRadius) {
+  if (d < ghostRadius + bonesRadius) {
     // Increase the ghost health
     ghostHealth = constrain(ghostHealth + eatHealth,0,ghostMaxHealth);
-    // Reduce the prey health
-    preyHealth = constrain(preyHealth - eatHealth,0,preyMaxHealth);
+    // Reduce the bones health
+    bonesHealth = constrain(bonesHealth - eatHealth,0,bonesMaxHealth);
 
-    // Check if the prey died
-    if (preyHealth === 0) {
-      // Move the "new" prey to a random position
-      preyX = random(0,width);
-      preyY = random(0,height);
+    // Check if the bones died
+    if (bonesHealth === 0) {
+      // Move the "new" bones to a random position
+      bonesX = random(0,width);
+      bonesY = random(0,height);
       // Give it full health
-      preyHealth = preyMaxHealth;
-      // Track how many prey were eaten
-      preyEaten++;
+      bonesHealth = bonesMaxHealth;
+      // Track how many bones were eaten
+      bonesEaten++;
     }
   }
 }
 
-// movePrey()
+// movebones()
 //
-// Moves the prey based on random velocity changes
-function movePrey() {
-  // Change the prey's velocity at random intervals
-  // random() will be < 0.05 5% of the time, so the prey
+// Moves the bones based on random velocity changes
+function movebones() {
+  // Change the bones's velocity at random intervals
+  // random() will be < 0.05 5% of the time, so the bones
   // will change direction on 5% of frames
     // Set velocity based on random values to get a new direction
     // and speed of movement
     // Use map() to convert from the 0-1 range of the random() function
-    // to the appropriate range of velocities for the prey
-    preyVX = map(noise(preytX),0,1,-preyMaxSpeed,preyMaxSpeed);
-    preyVY = map(noise(preytY),0,1,-preyMaxSpeed,preyMaxSpeed);
+    // to the appropriate range of velocities for the bones
+    bonesVX = map(noise(bonestX),0,1,-bonesMaxSpeed,bonesMaxSpeed);
+    bonesVY = map(noise(bonestY),0,1,-bonesMaxSpeed,bonesMaxSpeed);
 
 
-  // Update prey position based on velocity
-   preyX += preyVX;
-   preyY += preyVY;
+  // Update bones position based on velocity
+   bonesX += bonesVX;
+   bonesY += bonesVY;
 
-   if (preyX < 0) {
-     preyX += width;
+   if (bonesX < 0) {
+     bonesX += width;
    }
-   else if (preyX > width) {
-     preyX -= width;
-   }
-
-   if (preytY < 0) {
-     preyY += height;
-   }
-   else if (preyY > height) {
-     preyY -= height;
+   else if (bonesX > width) {
+     bonesX -= width;
    }
 
-   preytX += 0.01;
-   preytY += 0.01;
+   if (bonestY < 0) {
+     bonesY += height;
+   }
+   else if (bonesY > height) {
+     bonesY -= height;
+   }
+
+   bonestX += 0.01;
+   bonestY += 0.01;
 
 }
 
-// drawPrey()
+// drawbones()
 //
-// Draw the prey as an ellipse with alpha based on health
-function drawPrey() {
-  // fill(preyFill,preyHealth);
-  image(prey,preyX,preyY,preyRadius*2);
+// Draw the bones as an ellipse with alpha based on health
+function drawbones() {
+  // fill(bonesFill,bonesHealth);
+  image(bones,bonesX,bonesY,bonesRadius*2);
 }
 
 // drawghost()
@@ -291,7 +295,7 @@ function showGameOver() {
   textAlign(CENTER,CENTER);
   fill(0);
   var gameOverText = "GAME OVER\n";
-  gameOverText += "You ate " + preyEaten + " prey\n";
+  gameOverText += "You ate " + bonesEaten + " bones\n";
   gameOverText += "before you died."
   text(gameOverText,width/2,height/2);
 }
