@@ -13,20 +13,22 @@ sprinting, random movement, screen wrap.
 // Track whether the game is over
 var gameOver = false;
 
-// Player position, size, velocity
-var playerX;
-var playerY;
-var playerRadius = 25;
-var playerVX = 0;
-var playerVY = 0;
-var playerMaxSpeed = 2;
-// Player health
-var playerHealth;
-var playerMaxHealth = 255;
-// Player fill color
-var playerFill = 50;
+// ghost position, size, velocity
+var ghost;
+var ghostX;
+var ghostY;
+var ghostRadius = 50;
+var ghostVX = 0;
+var ghostVY = 0;
+var ghostMaxSpeed = 2;
+// ghost health
+var ghostHealth;
+var ghostMaxHealth = 255;
+// ghost fill color
+var ghostFill = 50;
 
 // Prey position, size, velocity
+var prey;
 var preyX;
 var preyY;
 var preytX;
@@ -35,6 +37,7 @@ var preyRadius = 25;
 var preyVX;
 var preyVY;
 var preyMaxSpeed = 4;
+
 // Prey health
 var preyHealth;
 var preyMaxHealth = 100;
@@ -46,6 +49,11 @@ var eatHealth = 10;
 // Number of prey eaten during the game
 var preyEaten = 0;
 
+function preload() {
+  ghost = loadImage("assets/images/ghost.png");
+  prey = loadImage("assets/images/bones.png");
+}
+
 // setup()
 //
 // Sets up the basic elements of the game
@@ -55,7 +63,7 @@ function setup() {
   noStroke();
 
   setupPrey();
-  setupPlayer();
+  setupghost();
 }
 
 // setupPrey()
@@ -74,20 +82,20 @@ function setupPrey() {
 
 }
 
-// setupPlayer()
+// setupghost()
 //
-// Initialises player position and health
-function setupPlayer() {
-  playerX = 4*width/5;
-  playerY = height/2;
-  playerHealth = playerMaxHealth;
+// Initialises ghost position and health
+function setupghost() {
+  ghostX = 4*width/5;
+  ghostY = height/2;
+  ghostHealth = ghostMaxHealth;
 
 }
 
 // draw()
 //
 // While the game is active, checks input
-// updates positions of prey and player,
+// updates positions of prey and ghost,
 // checks health (dying), checks eating (overlaps)
 // displays the two agents.
 // When the game is over, shows the game over screen.
@@ -97,14 +105,14 @@ function draw() {
   if (!gameOver) {
     handleInput();
 
-    movePlayer();
+    moveghost();
     movePrey();
 
     updateHealth();
     checkEating();
 
     drawPrey();
-    drawPlayer();
+    drawghost();
   }
   else {
     showGameOver();
@@ -113,66 +121,66 @@ function draw() {
 
 // handleInput()
 //
-// Checks arrow keys and adjusts player velocity accordingly
+// Checks arrow keys and adjusts ghost velocity accordingly
 function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(LEFT_ARROW)) {
-    playerVX = -playerMaxSpeed;
+    ghostVX = -ghostMaxSpeed;
   }
   else if (keyIsDown(RIGHT_ARROW)) {
-    playerVX = playerMaxSpeed;
+    ghostVX = ghostMaxSpeed;
   }
   else {
-    playerVX = 0;
+    ghostVX = 0;
   }
 
   // Check for vertical movement
   if (keyIsDown(UP_ARROW)) {
-    playerVY = -playerMaxSpeed;
+    ghostVY = -ghostMaxSpeed;
   }
   else if (keyIsDown(DOWN_ARROW)) {
-    playerVY = playerMaxSpeed;
+    ghostVY = ghostMaxSpeed;
   }
   else {
-    playerVY = 0;
+    ghostVY = 0;
   }
 }
 function sprint() {
   // Srpint ability while pressing the space bar
   if (keyIsDown(32)) {
-    playerMaxSpeed = 10;
-    playerHealth = constrain(playerHealth -1,0,playerMaxHealth);
+    ghostMaxSpeed = 10;
+    ghostHealth = constrain(ghostHealth - 1,0,ghostMaxHealth);
 
   }
   else {
-    playerMaxSpeed = 2;
+    ghostMaxSpeed = 2;
 
   }
 }
 
 
-// movePlayer()
+// moveghost()
 //
-// Updates player position based on velocity,
+// Updates ghost position based on velocity,
 // wraps around the edges.
-function movePlayer() {
+function moveghost() {
   // Update position
-  playerX += playerVX;
-  playerY += playerVY;
+  ghostX += ghostVX;
+  ghostY += ghostVY;
 
-  // Wrap when player goes off the canvas
-  if (playerX < 0) {
-    playerX += width;
+  // Wrap when ghost goes off the canvas
+  if (ghostX < 0) {
+    ghostX += width;
   }
-  else if (playerX > width) {
-    playerX -= width;
+  else if (ghostX > width) {
+    ghostX -= width;
   }
 
-  if (playerY < 0) {
-    playerY += height;
+  if (ghostY < 0) {
+    ghostY += height;
   }
-  else if (playerY > height) {
-    playerY -= height;
+  else if (ghostY > height) {
+    ghostY -= height;
   }
   sprint();
 
@@ -180,13 +188,13 @@ function movePlayer() {
 
 // updateHealth()
 //
-// Reduce the player's health (every frame)
-// Check if the player is dead
+// Reduce the ghost's health (every frame)
+// Check if the ghost is dead
 function updateHealth() {
-  // Reduce player health, constrain to reasonable range
-  playerHealth = constrain(playerHealth - 0.5,0,playerMaxHealth);
-  // Check if the player is dead
-  if (playerHealth === 0) {
+  // Reduce ghost health, constrain to reasonable range
+  ghostHealth = constrain(ghostHealth - 0.5,0,ghostMaxHealth);
+  // Check if the ghost is dead
+  if (ghostHealth === 0) {
     // If so, the game is over
     gameOver = true;
   }
@@ -194,14 +202,14 @@ function updateHealth() {
 
 // checkEating()
 //
-// Check if the player overlaps the prey and updates health of both
+// Check if the ghost overlaps the prey and updates health of both
 function checkEating() {
-  // Get distance of player to prey
-  var d = dist(playerX,playerY,preyX,preyY);
+  // Get distance of ghost to prey
+  var d = dist(ghostX,ghostY,preyX,preyY);
   // Check if it's an overlap
-  if (d < playerRadius + preyRadius) {
-    // Increase the player health
-    playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
+  if (d < ghostRadius + preyRadius) {
+    // Increase the ghost health
+    ghostHealth = constrain(ghostHealth + eatHealth,0,ghostMaxHealth);
     // Reduce the prey health
     preyHealth = constrain(preyHealth - eatHealth,0,preyMaxHealth);
 
@@ -260,16 +268,19 @@ function movePrey() {
 //
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
-  fill(preyFill,preyHealth);
-  ellipse(preyX,preyY,preyRadius*2);
+  // fill(preyFill,preyHealth);
+  image(prey,preyX,preyY,preyRadius*2);
 }
 
-// drawPlayer()
+// drawghost()
 //
-// Draw the player as an ellipse with alpha based on health
-function drawPlayer() {
-  fill(playerFill,playerHealth);
-  ellipse(playerX,playerY,playerRadius*2);
+// Draw the ghost as an ellipse with alpha based on health
+function drawghost() {
+  push();
+  tint(255,ghostHealth);
+  // fill(ghostFill,ghostHealth);
+  image(ghost,ghostX,ghostY,ghostRadius*2,ghostRadius*2);
+  pop();
 }
 
 // showGameOver()
