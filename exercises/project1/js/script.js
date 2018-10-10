@@ -1,8 +1,7 @@
 /******************************************************
 
-Game - Chaser
-Pippin Barr
-
+Game - halloween Chaser
+Harout Kullukian
 A simple game of cat and mouse.
 
 Physics-based movement, keyboard controls, health/stamina,
@@ -52,13 +51,14 @@ var bonesEaten = 0;
 // halloween background image, font and sound
 var backgroundimage;
 var halloweenFont;
+var halloweenSound;
 
 function preload() {
   ghost = loadImage("assets/images/ghost.png");
   bones = loadImage("assets/images/bones.png");
   backgroundimage = loadImage("assets/images/background.jpg");
   halloweenFont = loadFont("assets/halloween.ttf");
-
+  halloweenSound = new Audio("assets/sounds/sound.wav");
   }
 
 // setup()
@@ -66,14 +66,11 @@ function preload() {
 // Sets up the basic elements of the game
 function setup() {
   createCanvas(1000,700);
-
-
   noStroke();
-
   setupbones();
   setupghost();
+  halloweenSound.play();
 }
-
 // setupbones()
 //
 // Initialises bones's position, velocity, and health
@@ -87,7 +84,6 @@ function setupbones() {
   bonestY = random(0,1000);
   bonesX = width/5;
   bonesY = height/5;
-
 }
 
 // setupghost()
@@ -126,7 +122,6 @@ function draw() {
     showGameOver();
   }
 }
-
 // handleInput()
 //
 // Checks arrow keys and adjusts ghost velocity accordingly
@@ -141,7 +136,6 @@ function handleInput() {
   else {
     ghostVX = 0;
   }
-
   // Check for vertical movement
   if (keyIsDown(UP_ARROW)) {
     ghostVY = -ghostMaxSpeed;
@@ -165,8 +159,6 @@ function sprint() {
 
   }
 }
-
-
 // moveghost()
 //
 // Updates ghost position based on velocity,
@@ -191,7 +183,6 @@ function moveghost() {
     ghostY -= height;
   }
   sprint();
-
 }
 
 // updateHealth()
@@ -207,7 +198,6 @@ function updateHealth() {
     gameOver = true;
   }
 }
-
 // checkEating()
 //
 // Check if the ghost overlaps the bones and updates health of both
@@ -233,7 +223,6 @@ function checkEating() {
     }
   }
 }
-
 // movebones()
 //
 // Moves the bones based on random velocity changes
@@ -247,7 +236,6 @@ function movebones() {
     // to the appropriate range of velocities for the bones
     bonesVX = map(noise(bonestX),0,1,-bonesMaxSpeed,bonesMaxSpeed);
     bonesVY = map(noise(bonestY),0,1,-bonesMaxSpeed,bonesMaxSpeed);
-
 
   // Update bones position based on velocity
    bonesX += bonesVX;
@@ -266,12 +254,9 @@ function movebones() {
    else if (bonesY > height) {
      bonesY -= height;
    }
-
    bonestX += 0.01;
    bonestY += 0.01;
-
 }
-
 // drawbones()
 //
 // Draw the bones as an ellipse with alpha based on health
@@ -279,7 +264,6 @@ function drawbones() {
   // fill(bonesFill,bonesHealth);
   image(bones,bonesX,bonesY,bonesRadius*2);
 }
-
 // drawghost()
 //
 // Draw the ghost as an ellipse with alpha based on health
@@ -290,7 +274,6 @@ function drawghost() {
   image(ghost,ghostX,ghostY,ghostRadius*2,ghostRadius*2);
   pop();
 }
-
 // showGameOver()
 //
 // Display text about the game being over!
