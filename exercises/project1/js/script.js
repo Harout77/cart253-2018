@@ -33,8 +33,8 @@ var ghost3;
 
 // bones position, size, velocity
 var bones;
-var bonesX;
-var bonesY;
+var bonesX
+var bonesY
 var bonestX;
 var bonestY;
 var bonesRadius = 25;
@@ -58,6 +58,7 @@ var backgroundimage;
 var halloweenFont;
 var halloweenSound;
 
+//////////// NEW////////
 function preload() {
   ghost = loadImage("assets/images/ghost.png");
   ghost2 = loadImage("assets/images/ghost2.png");
@@ -67,7 +68,7 @@ function preload() {
   halloweenFont = loadFont("assets/halloween.ttf");
   halloweenSound = new Audio("assets/sounds/sound.wav");
   }
-
+//////////// END NEW////////
 // setup()
 //
 // Sets up the basic elements of the game
@@ -89,8 +90,8 @@ function setupbones() {
 
   bonestX = random(0,1000);
   bonestY = random(0,1000);
-  bonesX = width/5;
-  bonesY = height/5;
+  bonesX = random(0,width);
+  bonesY = random(0,height);
 }
 
 // setupghost()
@@ -152,6 +153,7 @@ function handleInput() {
     ghostVY = 0;
   }
 }
+//////////// NEW////////
 function sprint() {
   // Srpint ability while pressing the space bar
   if (keyIsDown(32)) {
@@ -164,6 +166,7 @@ function sprint() {
     ghostMaxSpeed = 2;
   }
 }
+//////////// END NEW////////
 // moveghost()
 //
 // Updates ghost position based on velocity,
@@ -279,6 +282,7 @@ function drawghost() {
   image(ghost,ghostX,ghostY,ghostRadius*2,ghostRadius*2);
   pop();
 
+//////////// NEW////////
 // add a next level
   if (bonesEaten >= 5){
     push();
@@ -296,6 +300,7 @@ function drawghost() {
     showWin ();
 
   }
+  //////////// END NEW////////
 }
 // showGameOver()
 //
@@ -313,6 +318,7 @@ function showGameOver() {
   text(gameOverText,width/2,height/2);
 
 }
+//////////// NEW////////
 function showWin () {
     textFont(halloweenFont);
     textSize(64);
@@ -331,4 +337,7 @@ function ui () {
   textSize(24);
   fill(255,165,0);
   text("You ate " + bonesEaten + " bones" ,800,20);
+  text("Press the spacebar to sprint", 650,650);
+
 }
+//////////// END NEW////////
