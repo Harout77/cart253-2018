@@ -108,7 +108,7 @@ function draw() {
 
   if (!gameOver) {
     handleInput();
-
+    ui()
     moveghost();
     movebones();
 
@@ -151,12 +151,12 @@ function sprint() {
   // Srpint ability while pressing the space bar
   if (keyIsDown(32)) {
     ghostMaxSpeed = 10;
+    // lose health while sprinting
     ghostHealth = constrain(ghostHealth - 1,0,ghostMaxHealth);
-
   }
+  //reset speed if not sprinting
   else {
     ghostMaxSpeed = 2;
-
   }
 }
 // moveghost()
@@ -288,4 +288,10 @@ function showGameOver() {
   gameOverText += "You ate " + bonesEaten + " bones\n";
   gameOverText += "before you died."
   text(gameOverText,width/2,height/2);
+}
+function ui () {
+  textFont(halloweenFont);
+  textSize(24);
+  fill(255,165,0);
+  text("You ate " + bonesEaten + " bones" ,800,20);
 }
