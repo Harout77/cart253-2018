@@ -26,6 +26,11 @@ var ghostMaxHealth = 255;
 // ghost fill color
 var ghostFill = 50;
 
+// new ghost level up
+var ghost2;
+var ghost3;
+
+
 // bones position, size, velocity
 var bones;
 var bonesX;
@@ -55,6 +60,8 @@ var halloweenSound;
 
 function preload() {
   ghost = loadImage("assets/images/ghost.png");
+  ghost2 = loadImage("assets/images/ghost2.png");
+  ghost3 = loadImage("assets/images/ghost3.png");
   bones = loadImage("assets/images/bones.png");
   backgroundimage = loadImage("assets/images/background.jpg");
   halloweenFont = loadFont("assets/halloween.ttf");
@@ -273,6 +280,20 @@ function drawghost() {
   // fill(ghostFill,ghostHealth);
   image(ghost,ghostX,ghostY,ghostRadius*2,ghostRadius*2);
   pop();
+
+// add a next level
+  if (bonesEaten >= 5){
+    push();
+    tint(255,ghostHealth);
+    image(ghost2,ghostX,ghostY,ghostRadius*2,ghostRadius*2);
+    pop();
+  }
+  if (bonesEaten >= 10){
+    push();
+    tint(255,ghostHealth);
+    image(ghost3,ghostX,ghostY,ghostRadius*2,ghostRadius*2);
+    pop();
+  }
 }
 // showGameOver()
 //
