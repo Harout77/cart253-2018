@@ -1,6 +1,6 @@
 /******************************************************************************
-Where's Sausage Dog?
-by Pippin Barr
+Where's Sausage Dog 2.0?
+by Harout Kullukian
 
 An algorithmic version of a Where's Wally searching game where you
 need to click on the sausage dog you're searching for in amongst all
@@ -14,6 +14,13 @@ https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal
 var targetX;
 var targetY;
 var targetImage;
+
+//velocity
+var vx;
+var vy;
+var speedChange = 1;
+var maxSpeed = 2;
+var radius = 100;
 
 // The ten decoy images
 var decoyImage1;
@@ -29,10 +36,19 @@ var decoyImage10;
 
 // The number of decoys to show on the screen, randomly
 // chosen from the decoy images
-var numDecoys = 100;
+var numDecoys ;
+var numDecoysMin  = 50;
+var numDecoysMax  = 500
 
+// randomizer
+function randomizer() {
+  numDecoys = random(numDecoysMin,numDecoysMax);
+}
 // Keep track of whether they've won
 var gameOver = false;
+
+//custom sound
+var win = new Audio("assets/win.wav");
 
 // preload()
 //
@@ -50,33 +66,74 @@ function preload() {
   decoyImage8 = loadImage("assets/images/animals-08.png");
   decoyImage9 = loadImage("assets/images/animals-09.png");
   decoyImage10 = loadImage("assets/images/animals-10.png");
+
+  //preload the audio
+  win = new Audio("assets/win.wav");
+
 }
-
-    function searchBox() {
-      fill(255,0,0);
-      rect (windowWidth - 230,0,400,200);
-      image(targetImage, windowWidth - 100, 60);
-    }
-
 // setup()
 //
 // Creates the canvas, sets basic modes, draws correct number
 // of decoys in random positions, then the target
-  function setup() {
+function setup() {
   createCanvas(windowWidth,windowHeight);
+  reset();
+}
+
+function draw() {
+
+
+  if (gameOver) {
+    // clear the decoys
+    background('#ffff00')
+    // Prepare our typography
+    textFont("Helvetica");
+    textSize(128);
+    textAlign(CENTER,CENTER);
+    noStroke();
+    fill(random(255));
+    // Tell them they won!
+    text("YASS YOU FOUND ME!!!!!",width/2,height/2);
+    //text bottom to replay
+    textFont("Helvetica");
+    textSize(72);
+    textAlign(CENTER,CENTER);
+    noStroke();
+    fill(random(255));
+    // Tell them they won!
+    text("PRESS ANY KEY TO CONTINUE",width/2 ,height/1.5);
+    noFill();
+    stroke(random(255));
+    strokeWeight(10);
+    noFill();
+    stroke(random(255));
+    strokeWeight(10);
+    ellipse(targetX,targetY,targetImage.width,targetImage.height, radius * 2);
+
+        vx += random(-speedChange,speedChange);
+        vy += random(-speedChange,speedChange);
+        targetX += vx;
+        targetY += vy;
+
+    // play the win song
+    win.play();
+
+    //reset button action
+    if (keyIsPressed === true) {
+      location.reload();    }
+  }
+}
+
+// this sets up the game and also resets it
+function reset() {
   background("#ffff00");
 
   imageMode(CENTER);
 
-
-
-// image search box
-
-
-
-
+  // Make the decoys random at each refresh
+  randomizer();
   // Use a for loop to draw as many decoys as we need
-  /* for (var i = 0; i < numDecoys; i++) {
+  for (var i = 0; i < numDecoys; i++) {
     // Choose a random location for this decoy
     var x = random(0,width);
     var y = random(0,height);
@@ -116,45 +173,38 @@ function preload() {
       image(decoyImage10,x,y);
     }
   }
-  */
-
   // Once we've displayed all decoys, we choose a location for the target
 
   targetX = random(0,width);
   targetY = random(0,height);
 
   // Prevent the target to spawn inder the searchbox
-    while (targetX > windowWidth - 250 && targetY < 300){
-     targetX = random(0,width);
-     targetY = random(0,height);
-   }
+  while (targetX > windowWidth - 250 && targetY < 300){
+    targetX = random(0,width);
+    targetY = random(0,height);
+  }
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
+  //setting the winning  annimation
+  vx = 0;
+  vy = 0;
 
+//prevent from auto ending game
+  gameOver = false ;
 }
+//searchbox function
+function searchBox() {
+  //draw the searchbox
+  fill(0,255,0);
+  rect(width-240,2,220,150);
+  //Insert the target image inside the rectangle
+  image(targetImage,width-100,50);
+  // Insert text
+  fill(0,0,0);
+  textSize(32);
+  textAlign(LEFT,CENTER);
+  text('Find Me',width-190,125);
 
-
-function draw() {
-
-  searchBox();
-
-
-
-  if (gameOver) {
-    // Prepare our typography
-    textFont("Helvetica");
-    textSize(128);
-    textAlign(CENTER,CENTER);
-    noStroke();
-    fill(random(255));
-    // Tell them they won!
-    text("YOU WINNED!",width/2,height/2);
-
-    noFill();
-    stroke(random(255));
-    strokeWeight(10);
-    ellipse(targetX,targetY,targetImage.width,targetImage.height);
-  }
 }
 
 // mousePressed()
