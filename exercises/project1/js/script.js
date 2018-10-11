@@ -11,7 +11,7 @@ sprinting, random movement, screen wrap.
 
 // Track whether the game is over
 var gameOver = false;
-var win = false;
+
 
 // ghost position, size, velocity
 var ghost;
@@ -124,7 +124,7 @@ function draw() {
   }
   else {
     showGameOver();
-    showWin()
+
 }
 }
 // handleInput()
@@ -292,9 +292,8 @@ function drawghost() {
     image(ghost3,ghostX,ghostY,ghostRadius*2,ghostRadius*2);
     pop();
   }
-  if (bonesEaten === 2 ){
+  if (bonesEaten === 15 ){
     showWin ();
-    gameOver = false
 
   }
 }
@@ -322,9 +321,9 @@ function showWin () {
     var wintext = "YOU WIN\n";
     wintext += "You ate " + bonesEaten + " bones\n";
     text(wintext,width/2,height/2);
-    textSize(24);
-     text("PRESS ANY KEY TO CONTINUE",width/2 ,height/1.5);
-    if (keyIsPressed === true) {
+    textSize(36);
+     text("PRESS RETURN OR ENTER TO PLAY AGAIN",width/2 ,height/1.5);
+    if (keyIsDown(13)) {
       location.reload();    }
 }
 function ui () {
