@@ -12,7 +12,7 @@ sprinting, random movement, screen wrap.
 // Track whether the game is over
 var gameOver = false;
 
-
+var title = true;
 // ghost position, size, velocity
 var ghost;
 var ghostX;
@@ -78,6 +78,7 @@ function setup() {
   setupbones();
   setupghost();
   halloweenSound.play();
+  //setTimeout(titlescreen,10000);
 }
 // setupbones()
 //
@@ -113,7 +114,11 @@ function setupghost() {
 // When the game is over, shows the game over screen.
 function draw() {
   background(backgroundimage);
-  if (!gameOver) {
+  if (title){
+    setTimeout(startGame,3000);
+    titlescreen();
+  }
+  else if (!gameOver) {
     handleInput();
     ui()
     moveghost();
@@ -339,5 +344,20 @@ function ui () {
   text("You ate " + bonesEaten + " bones" ,800,20);
   text("Press the spacebar to sprint", 650,650);
 
+}
+function titlescreen(){
+
+  textFont(halloweenFont);
+  textSize(64);
+  fill(255,165,0);
+  text("HALOOWEEN CHASER", 160 ,350);
+  textSize(32);
+  text("Feed the ghost to stay alive !", 300 ,400);
+
+
+}
+
+function startGame(){
+  title =false;
 }
 //////////// END NEW////////
