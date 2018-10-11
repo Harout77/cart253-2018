@@ -78,6 +78,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth,windowHeight);
   reset();
+  searchBox();
 }
 
 function draw() {
