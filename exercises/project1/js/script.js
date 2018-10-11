@@ -11,6 +11,7 @@ sprinting, random movement, screen wrap.
 
 // Track whether the game is over
 var gameOver = false;
+var win = false;
 
 // ghost position, size, velocity
 var ghost;
@@ -29,7 +30,6 @@ var ghostFill = 50;
 // new ghost level up
 var ghost2;
 var ghost3;
-
 
 // bones position, size, velocity
 var bones;
@@ -112,22 +112,20 @@ function setupghost() {
 // When the game is over, shows the game over screen.
 function draw() {
   background(backgroundimage);
-
   if (!gameOver) {
     handleInput();
     ui()
     moveghost();
     movebones();
-
     updateHealth();
     checkEating();
-
     drawbones();
     drawghost();
   }
   else {
     showGameOver();
-  }
+    showWin()
+}
 }
 // handleInput()
 //
@@ -294,6 +292,11 @@ function drawghost() {
     image(ghost3,ghostX,ghostY,ghostRadius*2,ghostRadius*2);
     pop();
   }
+  if (bonesEaten === 2 ){
+    showWin ();
+    gameOver = false
+
+  }
 }
 // showGameOver()
 //
@@ -309,6 +312,20 @@ function showGameOver() {
   gameOverText += "You ate " + bonesEaten + " bones\n";
   gameOverText += "before you died."
   text(gameOverText,width/2,height/2);
+
+}
+function showWin () {
+    textFont(halloweenFont);
+    textSize(64);
+    textAlign(CENTER,CENTER);
+    fill(255,165,0)
+    var wintext = "YOU WIN\n";
+    wintext += "You ate " + bonesEaten + " bones\n";
+    text(wintext,width/2,height/2);
+    textSize(24);
+     text("PRESS ANY KEY TO CONTINUE",width/2 ,height/1.5);
+    if (keyIsPressed === true) {
+      location.reload();    }
 }
 function ui () {
   textFont(halloweenFont);
