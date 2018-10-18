@@ -18,7 +18,7 @@ var ball = {
   size: 20,
   vx: 0,
   vy: 0,
-  speed: 5
+  speed: 5,
 }
 
 // PADDLES
@@ -26,6 +26,7 @@ var ball = {
 // How far in from the walls the paddles should be drawn on x
 var paddleInset = 50;
 
+//////// New ////////
 // LEFT PADDLE
 
 // Basic definition of a left paddle object with its key properties of
@@ -37,9 +38,10 @@ var leftPaddle = {
   h: 70,
   vx: 0,
   vy: 0,
-  speed: 5,
+  speed: 7,
   upKeyCode: 87, // The key code for W
-  downKeyCode: 83 // The key code for S
+  downKeyCode: 83, // The key code for S
+  score: 0,
 }
 
 // RIGHT PADDLE
@@ -53,13 +55,18 @@ var rightPaddle = {
   h: 70,
   vx: 0,
   vy: 0,
-  speed: 5,
+  speed: 7,
   upKeyCode: 38, // The key code for the UP ARROW
-  downKeyCode: 40 // The key code for the DOWN ARROW
+  downKeyCode: 40, // The key code for the DOWN ARROW
+  score: 0,
 }
-
+//////// END New ////////
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
+
+
+
+
 
 // preload()
 //
@@ -262,7 +269,32 @@ function handleBallOffScreen() {
     // position is reset.
     // This is where we would count points etc!
   }
+  //////// New ////////
+
+  // Update score
+  if (ballLeft < width) {
+    leftPaddle.score ++;
+    // reset();
+    console.log("leftPaddle.score")
+  }
+  if (ballRight > 0) {
+    rightPaddle.score ++;
+    // reset();
+    console.log("rightPaddle.score")
+
+  }
 }
+ // reset
+ function reset() {
+   ball.x = width/2;
+   ball.y = height/2;
+   ball.vx = ball.speed;
+   ball.vy = 5;
+   ball.size = random(10,40);
+   ball.speed = -ball.speed;
+ }
+
+
 
 // displayBall()
 //
