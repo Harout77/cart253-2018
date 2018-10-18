@@ -6,7 +6,7 @@
 
 // Game colors
 var bgColor = 0;
-var fgColor = 255;
+// var fgColor;
 
 // BALL
 
@@ -85,7 +85,9 @@ function setup() {
   createCanvas(640,480);
   rectMode(CENTER);
   noStroke();
-  fill(fgColor);
+
+  fgColor = color(255,0,0);
+  // fill(fgColor);
 
   setupPaddles();
   setupBall();
@@ -274,13 +276,27 @@ function handleBallOffScreen() {
   // Update score
   if (ballLeft > width) {
     leftPaddle.score ++;
+
+    // console.log("leftPaddle.score")
+
+    if (leftPaddle.score === 1) {
+
+      fill(255,0,0);
+    }
     reset(-1);
-    console.log("leftPaddle.score")
   }
   if (ballRight < 0) {
     rightPaddle.score ++;
-    reset(1);
-    console.log("rightPaddle.score")
+    // console.log("rightPaddle.score")
+
+        if (rightPaddle.score === 1) {
+
+          fill(0,255,0);
+        }
+        else if (rightPaddle.score != 1) {
+          fill(0,0,255)
+        }
+        reset(1);
 
   }
 }
@@ -300,7 +316,10 @@ function reset(winner) {
 //
 // Draws ball on screen based on its properties
 function displayBall() {
-  rect(ball.x,ball.y,ball.size,ball.size);
+  push()
+  fill(0,0,255)
+  ellipse(ball.x,ball.y,ball.size,ball.size);
+  pop()
 }
 
 // displayPaddle(paddle)
