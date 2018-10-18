@@ -272,27 +272,27 @@ function handleBallOffScreen() {
   //////// New ////////
 
   // Update score
-  if (ballLeft < width) {
+  if (ballLeft > width) {
     leftPaddle.score ++;
-    // reset();
+    reset(-1);
     console.log("leftPaddle.score")
   }
-  if (ballRight > 0) {
+  if (ballRight < 0) {
     rightPaddle.score ++;
-    // reset();
+    reset(1);
     console.log("rightPaddle.score")
 
   }
 }
- // reset
- function reset() {
-   ball.x = width/2;
-   ball.y = height/2;
-   ball.vx = ball.speed;
-   ball.vy = 5;
-   ball.size = random(10,40);
-   ball.speed = -ball.speed;
- }
+// reset
+function reset(winner) {
+  ball.x = width/2;
+  ball.y = height/2;
+  ball.vx = winner * ball.speed
+  ball.vy = random(5,10);
+  }
+
+
 
 
 
