@@ -42,6 +42,7 @@ var leftPaddle = {
   upKeyCode: 87, // The key code for W
   downKeyCode: 83, // The key code for S
   score: 0,
+
 }
 
 // RIGHT PADDLE
@@ -59,7 +60,11 @@ var rightPaddle = {
   upKeyCode: 38, // The key code for the UP ARROW
   downKeyCode: 40, // The key code for the DOWN ARROW
   score: 0,
+
 }
+// set up color for random rgb
+var r, g, b;
+
 //////// END New ////////
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
@@ -91,6 +96,8 @@ function setup() {
 
   setupPaddles();
   setupBall();
+
+
 }
 
 // setupPaddles()
@@ -277,25 +284,31 @@ function handleBallOffScreen() {
   if (ballLeft > width) {
     leftPaddle.score ++;
 
-    // console.log("leftPaddle.score")
-
-    if (leftPaddle.score === 1) {
-
-      fill(255,0,0);
-    }
+    // // console.log("leftPaddle.score")
+    //
+    // if (leftPaddle.score === 1) {
+    // }
+    // if (leftPaddle.score === 2 ) {
+    //
+    // }
+    // if (leftPaddle.score === 3 ) {
+    //
+    // }
+    // else if (leftPaddle.score < 1) {
+    // }
     reset(-1);
   }
   if (ballRight < 0) {
     rightPaddle.score ++;
     // console.log("rightPaddle.score")
-
-        if (rightPaddle.score === 1) {
-
-          fill(0,255,0);
-        }
-        else if (rightPaddle.score != 1) {
-          fill(0,0,255)
-        }
+        //
+        // if (rightPaddle.score === 1) {
+        //
+        //   fill(0,255,0);
+        // }
+        // else if (rightPaddle.score < 1) {
+        //   fill(255,255,255)
+        // }
         reset(1);
 
   }
@@ -306,6 +319,11 @@ function reset(winner) {
   ball.y = height/2;
   ball.vx = winner * ball.speed
   ball.vy = random(5,10);
+
+  // Change colors randomly at each reset
+  r = random(255);
+  g = random(255);
+  b = random(255);
   }
 
 
@@ -317,14 +335,17 @@ function reset(winner) {
 // Draws ball on screen based on its properties
 function displayBall() {
   push()
-  fill(0,0,255)
+  fill(r, g, b);
   ellipse(ball.x,ball.y,ball.size,ball.size);
   pop()
 }
+
+///// END NEW /////
 
 // displayPaddle(paddle)
 //
 // Draws the specified paddle on screen based on its properties
 function displayPaddle(paddle) {
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
+  fill(r, g, b);
 }
