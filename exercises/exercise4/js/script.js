@@ -5,7 +5,7 @@
 // just the ability to play the game with the keyboard.
 
 // Game colors
-var bgColor = 0;
+// var bgColor = 0;
 // var fgColor;
 
 // BALL
@@ -91,6 +91,7 @@ function setup() {
   rectMode(CENTER);
   noStroke();
 
+
   fgColor = color(255,0,0);
   // fill(fgColor);
 
@@ -128,8 +129,6 @@ function setupBall() {
 // Calls the appropriate functions to run the game
 function draw() {
   // Fill the background
-  background(bgColor);
-
   // Handle input
   // Notice how we're using the SAME FUNCTION to handle the input
   // for the two paddles!
@@ -324,6 +323,8 @@ function reset(winner) {
   r = random(255);
   g = random(255);
   b = random(255);
+  background(random(255), random(255), random(255));
+
   }
 
 
@@ -346,6 +347,8 @@ function displayBall() {
 //
 // Draws the specified paddle on screen based on its properties
 function displayPaddle(paddle) {
+
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
   fill(r, g, b);
+
 }
