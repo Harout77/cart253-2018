@@ -42,7 +42,6 @@ var leftPaddle = {
   upKeyCode: 87, // The key code for W
   downKeyCode: 83, // The key code for S
   score: 0,
-
 }
 
 // RIGHT PADDLE
@@ -60,18 +59,14 @@ var rightPaddle = {
   upKeyCode: 38, // The key code for the UP ARROW
   downKeyCode: 40, // The key code for the DOWN ARROW
   score: 0,
-
 }
 // set up color for random rgb
 var r, g, b;
-
+// background colour chaning variables
+let amt, startColor, newColor;
 //////// END New ////////
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
-
-
-
-
 
 // preload()
 //
@@ -79,7 +74,6 @@ var beepSFX;
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
 }
-
 // setup()
 //
 // Creates the canvas, sets up the drawing modes,
@@ -90,9 +84,12 @@ function setup() {
   createCanvas(640,480);
   rectMode(CENTER);
   noStroke();
+  //setup the background colours
+    startColor = color(255,255,255);
+    newColor = color(random(255),random(255),random(255));
+    amt = 0;
 
-
-  fgColor = color(255,0,0);
+  // fgColor = color(255,0,0);
   // fill(fgColor);
 
   setupPaddles();
@@ -128,7 +125,8 @@ function setupBall() {
 //
 // Calls the appropriate functions to run the game
 function draw() {
-  // Fill the background
+  // Fill the background using lerp randomizer
+  backgroundrandomizer()
   // Handle input
   // Notice how we're using the SAME FUNCTION to handle the input
   // for the two paddles!
@@ -323,14 +321,9 @@ function reset(winner) {
   r = random(255);
   g = random(255);
   b = random(255);
-  background(random(255), random(255), random(255));
-
+  //change the background colour randomly
+  // background(random(255), random(255), random(255),);
   }
-
-
-
-
-
 // displayBall()
 //
 // Draws ball on screen based on its properties
@@ -351,4 +344,13 @@ function displayPaddle(paddle) {
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
   fill(r, g, b);
 
+
+}
+function backgroundrandomizer(){
+  background(lerpColor(startColor, newColor, amt));
+  amt += 0.01;
+  if(amt >= 1){
+    amt = 0.0;
+    startColor = newColor;
+    newColor = color(random(255),random(255),random(255)); }
 }
