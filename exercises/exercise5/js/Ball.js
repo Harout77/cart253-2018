@@ -34,6 +34,9 @@ Ball.prototype.update = function () {
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
+
+    beepSFX.currentTime = 0;
+    beepSFX.play();
   }
 }
 
@@ -73,8 +76,12 @@ Ball.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+
+      beepSFX.currentTime = 0;
+      beepSFX.play();
     }
   }
+
 }
 
 // reset()
@@ -84,8 +91,8 @@ Ball.prototype.handleCollision = function(paddle) {
 Ball.prototype.reset = function (winner) {
   this.x = width/2;
   this.y = height/2;
-  this.vx = winner * ball.speed
-  this.vy = random(5,10);
+  // this.vx = winner * ball.speed
+  // this.vy = random(5,10);
 
   // Change colors randomly at each reset
   r = random(255);
@@ -100,4 +107,49 @@ function backgroundRandomizer(){
       startColor = newColor;
       newColor = color(random(255),random(255),random(255)); }
   }
+
+    Ball.prototype.score = function() {
+    // Update score
+    if (ball > width) {
+      leftPaddle.score ++;
+
+      // // console.log("leftPaddle.score")
+      //
+      if (leftPaddle.score === 1) {
+        leftPaddle.h = 50
+      }
+      if (leftPaddle.score === 2 ) {
+        leftPaddle.h = 30;
+
+      }
+      if (leftPaddle.score === 3 ) {
+      leftPaddle.h = 10;
+      }
+      // else if (leftPaddle.score < 1) {
+      // }
+      ball.reset(-1);
+    }
+    if (ball < 0) {
+      rightPaddle.score ++;
+      // console.log("rightPaddle.score")
+      if (leftPaddle.score === 1) {
+        rightPaddle.h = 50
+      }
+      if (leftPaddle.score === 2 ) {
+        rightPaddle.h = 30;
+
+      }
+      if (leftPaddle.score === 3 ) {
+        rightPaddle.h = 10;
+      }
+          ball.reset(1);
+
+    }
+  }
+
+
+
+
+
+
 ////// END NEW //////
