@@ -56,7 +56,7 @@ Ball.prototype.isOffScreen = function () {
 // Draw the ball as a rectangle on the screen
 Ball.prototype.display = function () {
   fill(255);
-  rect(this.x,this.y,this.size,this.size);
+  ellipse(this.x,this.y,this.size,this.size);
 }
 
 // handleCollision(paddle)
@@ -79,6 +79,7 @@ Ball.prototype.handleCollision = function(paddle) {
 
 // reset()
 //
+///// NEW /////
 // Set position back to the middle of the screen
 Ball.prototype.reset = function (winner) {
   this.x = width/2;
@@ -99,3 +100,4 @@ function backgroundRandomizer(){
       startColor = newColor;
       newColor = color(random(255),random(255),random(255)); }
   }
+////// END NEW //////
