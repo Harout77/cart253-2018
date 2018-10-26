@@ -1,6 +1,5 @@
-// Basic OO Pong
-// by Pippin Barr
-//
+// Advanced OO Pong
+// by Harout Kullukian
 // A primitive implementation of Pong with no scoring system
 // just the ability to play the game with the keyboard.
 //
@@ -23,20 +22,21 @@ var beepSFX;
 //
 // Creates the ball and paddles
 function setup() {
-  createCanvas(640,480);
+  createCanvas(640, 480);
   // Create a ball
-  ball = new Ball(width/2,height/2,5,5,10,5);
+  ball = new Ball(width / 2, height / 2, 5, 5, 10, 5);
   // Create the right paddle with UP and DOWN as controls
-  rightPaddle = new Paddle(width-20,height/2,10,60,10,DOWN_ARROW,UP_ARROW,50,0);
+  rightPaddle = new Paddle(width - 20, height / 2, 10, 60, 10, DOWN_ARROW, UP_ARROW, 50, 0);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(10,height/2,10,60,10,83,87,50,0);
+  leftPaddle = new Paddle(10, height / 2, 10, 60, 10, 83, 87, 50, 0);
 
   //// NEW /////
   //setup the background colours
-      startColor = color(255,255,255);
-      newColor = color(random(255),random(255),random(255));
-      amt = 0;
+  startColor = color(255, 255, 255);
+  newColor = color(random(255), random(255), random(255));
+  amt = 0;
+
   //// END NEW //////
 }
 
@@ -57,8 +57,7 @@ function draw() {
   if (ball.isOffScreen() && ball.vx > 0) {
     leftPaddle.Score();
     ball.reset();
-  }
-  else if (ball.isOffScreen() && ball.vx < 0) {
+  } else if (ball.isOffScreen() && ball.vx < 0) {
     rightPaddle.Score();
     ball.reset();
   }
@@ -68,9 +67,8 @@ function draw() {
   ball.handleCollision(rightPaddle);
 
   ball.display();
+  leftPaddle.winner();
+  rightPaddle.winner();
   leftPaddle.display();
   rightPaddle.display();
-
-
-
 }

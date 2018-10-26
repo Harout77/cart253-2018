@@ -77,3 +77,25 @@ Paddle.prototype.display = function() {
           this.h = 20;
         }
       }
+
+      Paddle.prototype.winner = function() {
+
+        if (this.score === 4) {
+          this.vx = 0;
+          this.vy = 0;
+          this.x = width/2;
+          this.y = height/2;
+    background(0)
+
+     textSize(50);
+     textAlign(CENTER);
+     fill (0,255,0);
+     text("WIN",width/2,height/2);
+     fill (0,255,0);
+     textSize(24);
+     text("PRESS RETURN OR ENTER TO PLAY AGAIN",width/2 ,height/2 + 60);
+       if (keyIsDown(13)) {
+     location.reload();    }
+
+        }
+      }

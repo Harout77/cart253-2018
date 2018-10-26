@@ -86,11 +86,7 @@ Ball.prototype.handleCollision = function(paddle) {
       beepSFX.currentTime = 0;
       beepSFX.play();
     }
-
-    // ////// END NEW ///////
   }
-  ////// NEW //////
-
 }
 
 // reset()
@@ -123,5 +119,7 @@ function backgroundRandomizer(){
       startColor = newColor;
       newColor = color(random(255),random(255),random(255)); }
   }
+
+  
 
 ////// END NEW //////
