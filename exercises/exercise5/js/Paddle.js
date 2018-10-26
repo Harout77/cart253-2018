@@ -10,7 +10,7 @@
 
 
 // Sets the properties with the provided arguments or defaults
-function Paddle(x,y,w,h,speed,downKey,upKey,indent) {
+function Paddle(x,y,w,h,speed,downKey,upKey,curve,score) {
   this.x = x;
   this.y = y;
   this.vx = 0;
@@ -22,7 +22,7 @@ function Paddle(x,y,w,h,speed,downKey,upKey,indent) {
   this.upKey = upKey;
   ///// New /////
   // vARIABLE FOR THE SCORE
-  this.score = 0;
+  this.score = score;
   this.curve = 50;
   // this.inset = 10;
   ///// END NEW //////
@@ -64,10 +64,16 @@ Paddle.prototype.display = function() {
 
 ///// NEW
 //
-    // Paddle.prototype.score = function(ball) {
-    //
-    //         this.score ++ ;
-    //         if (this.score === 1) {
-    //           this.h = 60
-    //         }
-    //     }
+    Paddle.prototype.Score = function() {
+        this.score ++ ;
+
+        if (this.score === 1) {
+          this.h = 40;
+        }
+        if (this.score === 2) {
+          this.h = 30;
+        }
+        if (this.score === 3) {
+          this.h = 20;
+        }
+      }

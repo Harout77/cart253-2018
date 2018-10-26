@@ -17,9 +17,7 @@ var rightPaddle;
 let amt, startColor, newColor;
 
 var beepSFX;
-function preload() {
-  beepSFX = new Audio("assets/sounds/beep.wav");
-}
+
 ///// END NEW /////
 // setup()
 //
@@ -29,10 +27,10 @@ function setup() {
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
   // Create the right paddle with UP and DOWN as controls
-  rightPaddle = new Paddle(width-20,height/2,10,60,10,DOWN_ARROW,UP_ARROW,50);
+  rightPaddle = new Paddle(width-20,height/2,10,60,10,DOWN_ARROW,UP_ARROW,50,0);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(10,height/2,10,60,10,83,87,50);
+  leftPaddle = new Paddle(10,height/2,10,60,10,83,87,50,0);
 
   //// NEW /////
   //setup the background colours
@@ -56,10 +54,15 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  if (ball.isOffScreen()) {
+  if (ball.isOffScreen() && ball.vx > 0) {
+    leftPaddle.Score();
     ball.reset();
-    // ball.score();
   }
+  else if (ball.isOffScreen() && ball.vx < 0) {
+    rightPaddle.Score();
+    ball.reset();
+  }
+  // rightPaddle.Score();
 
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
@@ -68,7 +71,6 @@ function draw() {
   leftPaddle.display();
   rightPaddle.display();
 
-  // leftPaddle.score();
-  // rightPaddle.score();
+
 
 }
