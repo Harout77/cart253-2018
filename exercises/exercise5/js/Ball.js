@@ -15,12 +15,15 @@ function Ball(x,y,vx,vy,size,speed) {
   this.size = size;
   this.speed = speed;
 }
+//// NEW /////
 // set up color for random rgb
   var r, g, b;
 
   function preload() {
     beepSFX = new Audio("assets/sounds/beep.wav");
   }
+
+  ////// END NEW ///////
 // update()
 //
 // Moves according to velocity, constrains y to be on screen,
@@ -82,9 +85,10 @@ Ball.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
-
+//// NEW /////
       beepSFX.currentTime = 0;
       beepSFX.play();
+      //// END NEW
     }
   }
 }
@@ -120,6 +124,6 @@ function backgroundRandomizer(){
       newColor = color(random(255),random(255),random(255)); }
   }
 
-  
+
 
 ////// END NEW //////

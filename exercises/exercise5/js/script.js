@@ -53,7 +53,7 @@ function draw() {
   ball.update();
   leftPaddle.update();
   rightPaddle.update();
-
+  ///// NEW /////
   if (ball.isOffScreen() && ball.vx > 0) {
     leftPaddle.Score();
     ball.reset();
@@ -62,13 +62,16 @@ function draw() {
     ball.reset();
   }
   // rightPaddle.Score();
+  ///// END NEW ////
 
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 
   ball.display();
+  ///// NEW /////
   leftPaddle.winner();
   rightPaddle.winner();
+  ///// END NEW ////
   leftPaddle.display();
   rightPaddle.display();
 }

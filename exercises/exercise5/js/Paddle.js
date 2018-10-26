@@ -63,7 +63,7 @@ Paddle.prototype.display = function() {
 }
 
 ///// NEW
-//
+
     Paddle.prototype.Score = function() {
         this.score ++ ;
 
@@ -80,11 +80,14 @@ Paddle.prototype.display = function() {
 
       Paddle.prototype.winner = function() {
 
+/// If you score 4 points you win
         if (this.score === 4) {
           this.vx = 0;
           this.vy = 0;
           this.x = width/2;
           this.y = height/2;
+
+// a win screen pops ou when you win
     background(0)
 
      textSize(50);
@@ -99,3 +102,4 @@ Paddle.prototype.display = function() {
 
         }
       }
+//// END NEW
