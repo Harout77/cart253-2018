@@ -24,7 +24,7 @@ function Paddle(x,y,w,h,speed,downKey,upKey,indent) {
   // vARIABLE FOR THE SCORE
   this.score = 0;
   this.curve = 50;
-  this.inset = 100;
+  // this.inset = 10;
   ///// END NEW //////
 }
 
@@ -57,17 +57,17 @@ Paddle.prototype.update = function() {
 //
 // Draw the paddle as a rectangle on the screen
 Paddle.prototype.display = function() {
-  fill(255);
+  fill(r, g, b);
+  noStroke();
   rect(this.x,this.y,this.w,this.h,this.curve);
 }
 
 ///// NEW
 //
-// Paddle.prototype.score = function() {
-//
-//         this.score ++ ;
-//         if (this.score === 1) {
-//           this.h = 60
-//         }
-//     }
-//
+    // Paddle.prototype.score = function(ball) {
+    //
+    //         this.score ++ ;
+    //         if (this.score === 1) {
+    //           this.h = 60
+    //         }
+    //     }

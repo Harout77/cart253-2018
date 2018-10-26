@@ -18,6 +18,9 @@ function Ball(x,y,vx,vy,size,speed) {
 // set up color for random rgb
   var r, g, b;
 
+  function preload() {
+    beepSFX = new Audio("assets/sounds/beep.wav");
+  }
 // update()
 //
 // Moves according to velocity, constrains y to be on screen,
@@ -58,7 +61,8 @@ Ball.prototype.isOffScreen = function () {
 //
 // Draw the ball as a rectangle on the screen
 Ball.prototype.display = function () {
-  fill(255);
+  fill(r, g, b);
+  noStroke();
   ellipse(this.x,this.y,this.size,this.size);
 }
 
@@ -67,8 +71,10 @@ Ball.prototype.display = function () {
 // Check if this ball overlaps the paddle passed as an argument
 // and if so reverse x velocity to bounce
 Ball.prototype.handleCollision = function(paddle) {
+
   // Check if the ball overlaps the paddle on x axis
   if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
+
     // Check if the ball overlaps the paddle on y axis
     if (this.y + this.size > paddle.y && this.y < paddle.y + paddle.h) {
       // If so, move ball back to previous position (by subtracting current velocity)
@@ -80,7 +86,10 @@ Ball.prototype.handleCollision = function(paddle) {
       beepSFX.currentTime = 0;
       beepSFX.play();
     }
+
+    // ////// END NEW ///////
   }
+  ////// NEW //////
 
 }
 
@@ -88,17 +97,24 @@ Ball.prototype.handleCollision = function(paddle) {
 //
 ///// NEW /////
 // Set position back to the middle of the screen
-Ball.prototype.reset = function (winner) {
+Ball.prototype.reset = function () {
   this.x = width/2;
   this.y = height/2;
-  // this.vx = winner * ball.speed
-  // this.vy = random(5,10);
+  this.vy = random(5,10);
+  // //  Speed increase with each RESET
+  this.speed = -this.speed;
+  this.vx = -1*this.vx;
+  // ball gets bigger also;
+    this.size = random(7,30)    ;
 
   // Change colors randomly at each reset
   r = random(255);
   g = random(255);
   b = random(255);
 }
+
+
+// function to randomize the background colour
 function backgroundRandomizer(){
     background(lerpColor(startColor, newColor, amt));
     amt += 0.01;
@@ -107,49 +123,5 @@ function backgroundRandomizer(){
       startColor = newColor;
       newColor = color(random(255),random(255),random(255)); }
   }
-
-    Ball.prototype.score = function() {
-    // Update score
-    if (ball > width) {
-      leftPaddle.score ++;
-
-      // // console.log("leftPaddle.score")
-      //
-      if (leftPaddle.score === 1) {
-        leftPaddle.h = 50
-      }
-      if (leftPaddle.score === 2 ) {
-        leftPaddle.h = 30;
-
-      }
-      if (leftPaddle.score === 3 ) {
-      leftPaddle.h = 10;
-      }
-      // else if (leftPaddle.score < 1) {
-      // }
-      ball.reset(-1);
-    }
-    if (ball < 0) {
-      rightPaddle.score ++;
-      // console.log("rightPaddle.score")
-      if (leftPaddle.score === 1) {
-        rightPaddle.h = 50
-      }
-      if (leftPaddle.score === 2 ) {
-        rightPaddle.h = 30;
-
-      }
-      if (leftPaddle.score === 3 ) {
-        rightPaddle.h = 10;
-      }
-          ball.reset(1);
-
-    }
-  }
-
-
-
-
-
 
 ////// END NEW //////
