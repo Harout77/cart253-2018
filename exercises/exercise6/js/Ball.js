@@ -21,16 +21,16 @@ function Ball(x,y,vx,vy,size,speed) {
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
-Ball.prototype.updated = function () {
+Ball.prototype.update = function () {  /// Fixed the update and function syntax
   // Update position with velocity
-  this.x = this.vx;
+  this.x += this.vx;  //// added the missing plus next to the equal
   this.y += this.vy;
 
   // Constrain y position to be on screen
   this.y = constrain(this.y,0,height-this.size);
 
   // Check for touching upper or lower edge and reverse velocity if so
-  if (this.y = 0 || this.y + this.size === height) {
+  if (this.y === 0 || this.y + this.size === height) {  //added 2 eual signs to make sure its 100% equal
     this.vy = -this.vy;
   }
 }
