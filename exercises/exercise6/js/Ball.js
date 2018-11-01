@@ -69,7 +69,7 @@ Ball.prototype.handleCollision = function(paddle) { //fixed the typo of prototyp
       this.x -= this.vx;
       this.y -= this.vy;
       // Reverse x velocity to bounce
-      this.vx = -this.vx;  //// added a - to reverse the velocity 
+      this.vx = -this.vx;  //// added a - to reverse the velocity
     }
   }
 }
@@ -77,7 +77,7 @@ Ball.prototype.handleCollision = function(paddle) { //fixed the typo of prototyp
 // reset()
 //
 // Set position back to the middle of the screen
-Ball.prototype.rest = function () {
+Ball.prototype.reset = function () {  /// fixed the typo of .reset
   this.x = width/2;
   this.y = height/2;
 }
