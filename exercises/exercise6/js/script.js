@@ -26,8 +26,8 @@ function setup() {
   rightPaddle = new Paddle(width-10,height/2,10,600,10,UP_ARROW,DOWN_ARROW);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(0,height/2,10,60,10,83,87); /////// Fixed the  open parameter with a )
-}   ////////// added missing closing bracket  }
+  leftPaddle = new Paddle(0,height/2,10,60,10,83,87); /////// FIXED the  open parameter with a )
+}   ////////// FIXED by added missing closing bracket  }
 
 // draw()
 //
@@ -39,7 +39,7 @@ function draw() {
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
-  ball.update;
+  ball.update();/////// FIXED added the 2 ()
   leftPaddle.update();
   rightPaddle.update();
 
