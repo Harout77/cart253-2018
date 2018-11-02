@@ -23,7 +23,7 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {  /// FIXED the typo for the word 
 // Check if the up or down keys are pressed and update velocity
 // appropriately
 Paddle.prototype.handleInput = function() {   //// FIXED typo mistake in the word prototype
-  if (keyIsDown(upKey)) {   ///// FIXED typo keyIsDown()  //// Double fix i made with typing down 2x
+  if (keyIsDown(upKey)) {   ///// FIXED typo keyIsDown()  //// Double fix i made with typing down 2x //// Another FIX at this.upkey
     this.vy = -this.speed;
   }
   else if (keyIsDown(downKey)) {   ///// FIXED typo keyIsDown()
