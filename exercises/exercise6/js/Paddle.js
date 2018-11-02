@@ -23,11 +23,14 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {  /// fixed the typo for the word 
 // Check if the up or down keys are pressed and update velocity
 // appropriately
 Paddle.prototype.handleInput = function() {   //// Fixed typo mistake in the word prototype
-  if (keyDown(upKey)) {
+  if (keyIsDownDown(upKey)) {   ///// Fixed typo keyIsDown()
     this.vy = -this.speed;
   }
-  else if (keyDown(downKey)) {
+  else if (keyIsDown(downKey)) {   ///// Fixed typo keyIsDown()
     this.vy = -this.speed;
+  }
+  else {
+    this.vy = 0;  ///// Fixed added this code so that the paddles don't move if not pressing any key
   }
 }
 
