@@ -43,7 +43,7 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  if (ball.isOffTheScreen())
+  if (ball.isOffScreen()) {   ///// fixed typo isOffScreen and added a { because that's how an if statment begins
     reset();
   }
 
