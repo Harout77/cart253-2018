@@ -54,5 +54,5 @@ function draw() {
   leftPaddle.display();
   rightPaddle.display(); ////// FIXED by closing the ()
 
-
-  ////// FIXED by removing the extra }
+}
+  ////// Fix I guess we needed this curley bracket
