@@ -39,8 +39,8 @@ Paddle.prototype.handleInput = function() {   //// Fixed typo mistake in the wor
 // Constrain the resulting position to be within the canvas
 Paddle.prototype.update = function() {
   this.y += this.vy;
-  this.y = constraint(this.y,0,height,this.h);   ////// Fixed typo height and switched the - into a ,
-}
+  this.y = constrain(this.y,0,height,this.h);   ////// Fixed typo height and switched the - into a ,
+}    ////// Fixed the typo constrain
 
 // display()
 //
