@@ -9,11 +9,11 @@
 function Paddle(x,y,w,h,speed,downKey,upKey) {  /// fixed the typo for the word paddle
   this.x = x;
   this.y = y;
-  this.xv = 0;
-  this.yv = 0;
+  this.vx = 0;  ///// Fixed typo vx
+  this.yv = 0;  ///// Fixed typo vy
   this.w = w;
   this.h = h;
-  this.speed = speeed;
+  this.speed = speed; //// Fixed typo extra e
   this.downKey = downKey;
   this.upKey = upKey;
 }
