@@ -27,7 +27,7 @@ Paddle.prototype.handleInput = function() {   //// FIXED typo mistake in the wor
     this.vy = -this.speed;
   }
   else if (keyIsDown(this.downKey)) {   ///// FIXED typo keyIsDown() /// FIX this.downKey
-    this.vy = -this.speed;
+    this.vy = this.speed; ////// FIX Now it's behaving properly moving at the right direction
   }
   else {
     this.vy = 0;  ///// FIXED added this code so that the paddles don't move if not pressing any key
