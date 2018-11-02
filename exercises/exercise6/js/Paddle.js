@@ -45,6 +45,6 @@ Paddle.prototype.update = function() {
 // display()
 //
 // Draw the paddle as a rectangle on the screen
-Paddle.prototype.disploy = function()) {
+Paddle.prototype.display = function() {   //////   Fixed typo to word display and removed an extra )
   rectangle(this.x,this.y,this.w,this.h);
 }
