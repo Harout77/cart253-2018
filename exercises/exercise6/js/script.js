@@ -43,8 +43,8 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  if (ball.isOffScreen()) {   ///// fixed typo isOffScreen and added a { because that's how an if statment begins
-    reset();
+  if (ball.isOffScreen()) {   ///// FIXED typo isOffScreen and added a { because that's how an if statment begins
+    ball.reset();   ////  FIXED added a definition to reset function 
   }
 
   ball.handleCollision(leftPaddle);
@@ -55,4 +55,4 @@ function draw() {
   rightPaddle.display(); ////// FIXED by closing the ()
 
 }
-  ////// Fix I guess we needed this curley bracket
+  ////// FIXED I guess we needed this curley bracket
