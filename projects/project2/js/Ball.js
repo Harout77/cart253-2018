@@ -67,7 +67,7 @@ Ball.prototype.isOffScreen = function () {
 // Draw the ball as a rectangle on the screen
 Ball.prototype.display = function () {
   fill(255);
-  rect(this.x,this.y,this.size,this.size);
+  ellipse(this.x,this.y,this.size,this.size);
 }
 
 // handleCollision(paddle)
@@ -101,7 +101,7 @@ Ball.prototype.reset = function (winner) {
   this.x = width/2;
   this.y = height/2;
   ///// NEW ////
-  this.vy = random(5,10);
+  this.vy = random(-5,10);
   // //  Speed increase with each RESET
   this.speed = -this.speed;
   this.vx = -1*this.vx;
