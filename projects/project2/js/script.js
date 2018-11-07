@@ -13,7 +13,6 @@
 var ball;
 var leftPaddle;
 var rightPaddle;
-
 // setup()
 //
 // Creates the ball and paddles
@@ -26,6 +25,13 @@ function setup() {
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
+  //// NEW /////
+  //setup the background colours
+  startColor = color(255, 255, 255);
+  newColor = color(random(255), random(255), random(255));
+  amt = 0;
+
+  //// END NEW //////
 }
 
 // draw()
@@ -34,6 +40,7 @@ function setup() {
 // and displays everything.
 function draw() {
   background(0);
+  backgroundRandomizer();
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
@@ -52,4 +59,6 @@ function draw() {
   ball.display();
   leftPaddle.display();
   rightPaddle.display();
+
+
 }
