@@ -15,7 +15,13 @@ function Ball(x,y,vx,vy,size,speed) {
   this.size = size;
   this.speed = speed;
 }
+//// NEW /////
 
+  function preload() {
+    beepSFX = new Audio("assets/sounds/beep.wav");
+  }
+
+  ////// END NEW ///////
 // update()
 //
 // Moves according to velocity, constrains y to be on screen,
@@ -32,6 +38,13 @@ Ball.prototype.update = function () {
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
+
+
+    ///// NEW /////
+    /// Play beep at each collision
+    beepSFX.currentTime = 0;
+    beepSFX.play();
+
   }
 }
 
@@ -71,6 +84,12 @@ Ball.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+
+      ////// NEW /////
+      ///Play sound at each collision
+      beepSFX.currentTime = 0;
+      beepSFX.play();
+      ///// END NEW //////
     }
   }
 }
