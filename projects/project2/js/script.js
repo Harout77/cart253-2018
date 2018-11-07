@@ -13,6 +13,12 @@
 var ball;
 var leftPaddle;
 var rightPaddle;
+////// NEW //////
+// Track whether the game is over
+var gameOver = false;
+var intro = true;
+
+
 // setup()
 //
 // Creates the ball and paddles
@@ -40,25 +46,36 @@ function setup() {
 // and displays everything.
 function draw() {
   background(0);
-  backgroundRandomizer();
-
-  leftPaddle.handleInput();
-  rightPaddle.handleInput();
-
-  ball.update();
-  leftPaddle.update();
-  rightPaddle.update();
-
-  if (ball.isOffScreen()) {
-    ball.reset();
+  if (intro){
+    setTimeout(startGame,3000);
+    Intro();
   }
+  else if (!gameOver) {
 
-  ball.handleCollision(leftPaddle);
-  ball.handleCollision(rightPaddle);
+    backgroundRandomizer();
 
-  ball.display();
-  leftPaddle.display();
-  rightPaddle.display();
+    leftPaddle.handleInput();
+    rightPaddle.handleInput();
+
+    ball.update();
+    leftPaddle.update();
+    rightPaddle.update();
+
+    if (ball.isOffScreen()) {
+      ball.reset();
+    }
+
+    ball.handleCollision(leftPaddle);
+    ball.handleCollision(rightPaddle);
+
+    ball.display();
+    leftPaddle.display();
+    rightPaddle.display();
+
+  }
+  else {
+    gameover();
+  }
 
 
 }

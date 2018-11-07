@@ -2,28 +2,36 @@
 
 let amt, startColor, newColor;
 
-var intro;
 var gameover;
 
 
+var pixelfont;
 
 
-//// NEW /////
-//setup the background colours
-startColor = color(255, 255, 255);
-newColor = color(random(255), random(255), random(255));
-amt = 0;
+//
+//
+function preload() {
+pixelfont = loadFont("assets/font/pixel.ttf");
+beepSFX = new Audio("assets/sounds/beep.wav");
 
-//// END NEW //////
+//
+ }
+
+function Intro() {
+
+background(0)
+  textFont(pixelfont);
+  textSize(38);
+  fill(255,0,0);
+  text("PONG DELUX", width/5 ,height/2);
+}
 
 
 
 
-
-
-
-
-
+function startGame(){
+  intro =false;
+}
 
 // function to randomize the background colour
 function backgroundRandomizer(){
