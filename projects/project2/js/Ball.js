@@ -97,7 +97,15 @@ Ball.prototype.handleCollision = function(paddle) {
 // reset()
 //
 // Set position back to the middle of the screen
-Ball.prototype.reset = function () {
+Ball.prototype.reset = function (winner) {
   this.x = width/2;
   this.y = height/2;
+  ///// NEW ////
+  this.vy = random(5,10);
+  // //  Speed increase with each RESET
+  this.speed = -this.speed;
+  this.vx = -1*this.vx;
+  // ball gets bigger also;
+    this.size = random(7,30)    ;
+  /////  End New ////
 }
