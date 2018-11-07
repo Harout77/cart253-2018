@@ -6,6 +6,8 @@
 
 // Ball constructor
 //
+// set up color for random rgb
+
 // Sets the properties with the provided arguments
 function Ball(x,y,vx,vy,size,speed) {
   this.x = x;
@@ -16,7 +18,7 @@ function Ball(x,y,vx,vy,size,speed) {
   this.speed = speed;
 }
 //// NEW /////
-
+var r, g, b;
   function preload() {
     beepSFX = new Audio("assets/sounds/beep.wav");
   }
@@ -66,8 +68,11 @@ Ball.prototype.isOffScreen = function () {
 //
 // Draw the ball as a rectangle on the screen
 Ball.prototype.display = function () {
-  fill(255);
-  ellipse(this.x,this.y,this.size,this.size);
+  ////// NEW ///////
+  //// Randomize the color of the ball
+  fill(r, g, b);
+  noStroke();
+  rect(this.x,this.y,this.size,this.size);
 }
 
 // handleCollision(paddle)
@@ -107,5 +112,11 @@ Ball.prototype.reset = function (winner) {
   this.vx = -1*this.vx;
   // ball gets bigger also;
     this.size = random(7,30)    ;
+
+
+    // Change colors randomly at each reset
+  r = random(255);
+  g = random(255);
+  b = random(255);
   /////  End New ////
 }
