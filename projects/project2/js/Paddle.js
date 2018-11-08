@@ -70,20 +70,21 @@ Paddle.prototype.display = function() {
   rect(this.x,this.y,this.w,this.h);
 }
 
-Paddle.prototype.winner = function() {
+// Paddle.prototype.winner = function() {
 
-/// If you score 4 points you win
-        if (this.score === 1) {
-          gameOver = true;
-        }
-       }
+// /// If you score 4 points you win
+//         if (this.score === 1) {
+//           gameOver = true;
+//         }
+//        }
 
 
 ///// NEW
 //
-    Paddle.prototype.Score = function() {
-        this.score ++ ;
-      }
+    // Paddle.prototype.Score = function() {
+    //     this.score ++ ;
+    //     th
+    //   }
         //
         // if (this.score === 1) {
         //   this.h = 40;

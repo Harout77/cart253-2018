@@ -40,28 +40,45 @@ function backgroundRandomizer(){
       newColor = color(random(255),random(255),random(255)); }
   }
 
+function displayScore() {
 
+  textAlign(CENTER,CENTER);
+    textSize(32);
+    fill(255);
+    text(rightPaddle.score,width/4, height/2);
+    text(leftPaddle.score,width/4*3, height/2);
+
+}
 
 
 
   ///// NEW
 
 function gameover() {
-if (rightPaddle.score ===1) {
+if (rightPaddle.score ===5) {
   background(0)
   textFont(pixelfont);
   textSize(38);
   fill(0,255,0);
-  text("RIGHT WON", width/5 ,height/2);
+  text("RIGHT WON", width/2 ,height/2);
+  textSize(18);
+  text("PRESS RETURN OR ENTER TO PLAY AGAIN",width/2,height/2 + 60);
+       if (keyIsDown(13)) {
+     location.reload();    }
 
 }
-else if (leftPaddle.score ===1) {
+else if (leftPaddle.score ===5) {
 
   background(0)
   textFont(pixelfont);
   textSize(38);
-  fill(0,255,0);
-  text("LEFT WON", width/5 ,height/2);
+  fill(0,0,255);
+  text("LEFT WON", width/2 ,height/2);
+  textSize(18);
+  text("PRESS RETURN OR ENTER TO PLAY AGAIN",width/2 ,height/2 + 60);
+       if (keyIsDown(13)) {
+     location.reload();    }
+
 }
 }
   //// END NEW

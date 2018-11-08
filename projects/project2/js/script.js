@@ -53,7 +53,7 @@ function draw() {
   else if (!gameOver) {
 
     backgroundRandomizer();
-
+    displayScore();
     leftPaddle.handleInput();
     rightPaddle.handleInput();
 
@@ -77,10 +77,10 @@ function draw() {
     ball.display();
     leftPaddle.display();
     rightPaddle.display();
-    ///// NEW /////
-   leftPaddle.winner();
-   rightPaddle.winner();
-   ///// END NEW ////
+   //  ///// NEW /////
+   // leftPaddle.winner();
+   // rightPaddle.winner();
+   // ///// END NEW ////
 
   }
   else {

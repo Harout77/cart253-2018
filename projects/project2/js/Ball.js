@@ -57,14 +57,7 @@ Ball.prototype.update = function () {
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
   if (this.x + this.size < 0 || this.x > width) {
-    return true;    if (ball.isOffScreen() && ball.vx > 0) {
-         leftPaddle.Score();
-         ball.reset();
-        } else if (ball.isOffScreen() && ball.vx < 0) {
-         rightPaddle.Score();
-         ball.reset();
-        }
-
+    return true;
   }
   else {
     return false;
@@ -119,7 +112,7 @@ Ball.prototype.reset = function (winner) {
   this.speed = -this.speed;
   this.vx = -1*this.vx;
   // ball gets bigger also;
-    this.size = random(7,30)    ;
+    this.size = random(7,30);
 
 
     // Change colors randomly at each reset
