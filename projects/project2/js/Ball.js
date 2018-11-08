@@ -17,6 +17,15 @@ function Ball(x,y,vx,vy,size,speed) {
   this.size = size;
   this.speed = speed;
 }
+function BadBall(x,y,vx,vy,size,speed) {
+  this.x = x;
+  this.y = y;
+  this.vx = vx;
+  this.vy = vy;
+  this.size = size;
+  this.speed = speed;
+}
+
 //// NEW /////
 var r, g, b;
   function preload() {
@@ -49,7 +58,26 @@ Ball.prototype.update = function () {
 
   }
 }
+BadBall.prototype.update = function () {
+  // Update position with velocity
+  this.x += this.vx;
+  this.y += this.vy;
 
+  // Constrain y position to be on screen
+  this.y = constrain(this.y,0,height-this.size);
+
+  // Check for touching upper or lower edge and reverse velocity if so
+  if (this.y === 0 || this.y + this.size === height) {
+    this.vy = -this.vy;
+
+
+    ///// NEW /////
+    /// Play beep at each collision
+    beepSFX.currentTime = 0;
+    beepSFX.play();
+
+  }
+}
 // isOffScreen()
 //
 // Checks if the ball has moved off the screen and, if so, returns true.
@@ -64,6 +92,17 @@ Ball.prototype.isOffScreen = function () {
   }
 
 }
+BadBall.prototype.isOffScreen = function () {
+  // Check for going off screen and reset if so
+  if (this.x + this.size < 0 || this.x > width) {
+    return true;
+  }
+  else {
+    return false;
+  }
+
+}
+
 
 // display()
 //
@@ -72,6 +111,13 @@ Ball.prototype.display = function () {
   ////// NEW ///////
   //// Randomize the color of the ball
   fill(r, g, b);
+  noStroke();
+  rect(this.x,this.y,this.size,this.size);
+}
+BadBall.prototype.display = function () {
+  ////// NEW ///////
+  //// Randomize the color of the ball
+  fill(255,0,0);
   noStroke();
   rect(this.x,this.y,this.size,this.size);
 }
@@ -99,6 +145,34 @@ Ball.prototype.handleCollision = function(paddle) {
     }
   }
 }
+BadBall.prototype.handleCollision = function(paddle) {
+  // Check if the ball overlaps the paddle on x axis
+  if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
+    // Check if the ball overlaps the paddle on y axis
+    if (this.y + this.size > paddle.y && this.y < paddle.y + paddle.h) {
+      // If so, move ball back to previous position (by subtracting current velocity)
+      this.x -= this.vx;
+      this.y -= this.vy;
+      // Reverse x velocity to bounce
+      this.vx = -this.vx;
+
+
+      if (leftPaddle){
+        leftPaddle.score-- ;
+      }
+       if (rightPaddle){
+        rightPaddle.score--;
+      }
+      ////// NEW /////
+      ///Play sound at each collision
+      beepSFX.currentTime = 0;
+      beepSFX.play();
+      ///// END NEW //////
+    }
+
+  }
+
+}
 
 // reset()
 //
@@ -120,4 +194,17 @@ Ball.prototype.reset = function (winner) {
   g = random(255);
   b = random(255);
   /////  End New ////
+}
+// Set position back to the middle of the screen
+BadBall.prototype.reset = function (winner) {
+  this.x = width/2;
+  this.y = height/2;
+  ///// NEW ////
+  this.vy = random(-5,10);
+  // //  Speed increase with each RESET
+  this.speed = -this.speed;
+  this.vx = -1*this.vx;
+  // ball gets bigger also;
+    this.size = random(7,30);
+
 }

@@ -18,7 +18,8 @@ var rightPaddle;
 var gameOver = false;
 var intro = true;
 
-
+var badballs = [];
+var numBalls = 1;
 // setup()
 //
 // Creates the ball and paddles
@@ -36,6 +37,9 @@ function setup() {
   startColor = color(255, 255, 255);
   newColor = color(random(255), random(255), random(255));
   amt = 0;
+  for (var i = 0; i < numBalls; i++) {
+      badballs.push(new BadBall(width/2,height/2,random(-5,5),random(-5,5),10,5));
+    }
 
   //// END NEW //////
 }
@@ -70,7 +74,15 @@ function draw() {
            ball.reset();
           }
 
-
+          for (var i = 0; i < badballs.length; i++) {
+              badballs[i].update();
+              if (badballs[i].isOffScreen()) {
+                badballs[i].reset();
+              }
+              badballs[i].handleCollision(leftPaddle);
+              badballs[i].handleCollision(rightPaddle);
+              badballs[i].display();
+            }
     ball.handleCollision(leftPaddle);
     ball.handleCollision(rightPaddle);
 
@@ -81,9 +93,7 @@ function draw() {
    // leftPaddle.winner();
    // rightPaddle.winner();
    // ///// END NEW ////
+gameover();
+  }
 
-  }
-  else {
-    gameover();
-  }
 }

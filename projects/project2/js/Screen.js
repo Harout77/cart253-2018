@@ -2,7 +2,7 @@
 
 let amt, startColor, newColor;
 
-var gameover;
+
 
 
 var pixelfont;
@@ -55,8 +55,10 @@ function displayScore() {
   ///// NEW
 
 function gameover() {
-if (rightPaddle.score ===5) {
+if (rightPaddle.score === 10) {
+
   background(0)
+
   textFont(pixelfont);
   textSize(38);
   fill(0,255,0);
@@ -67,9 +69,10 @@ if (rightPaddle.score ===5) {
      location.reload();    }
 
 }
-else if (leftPaddle.score ===5) {
+else if (leftPaddle.score ===10) {
 
   background(0)
+
   textFont(pixelfont);
   textSize(38);
   fill(0,0,255);
@@ -80,5 +83,6 @@ else if (leftPaddle.score ===5) {
      location.reload();    }
 
 }
+
 }
   //// END NEW
