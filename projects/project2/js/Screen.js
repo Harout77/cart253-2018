@@ -47,11 +47,21 @@ function backgroundRandomizer(){
   ///// NEW
 
 function gameover() {
+if (rightPaddle.score ===1) {
+  background(0)
+  textFont(pixelfont);
+  textSize(38);
+  fill(0,255,0);
+  text("RIGHT WON", width/5 ,height/2);
 
-background(0)
-textFont(pixelfont);
-textSize(38);
-fill(0,255,0);
-text("PONG DELUX", width/5 ,height/2);
+}
+else if (leftPaddle.score ===1) {
+
+  background(0)
+  textFont(pixelfont);
+  textSize(38);
+  fill(0,255,0);
+  text("LEFT WON", width/5 ,height/2);
+}
 }
   //// END NEW

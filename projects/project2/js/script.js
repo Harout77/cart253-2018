@@ -61,17 +61,14 @@ function draw() {
     leftPaddle.update();
     rightPaddle.update();
 
-    ///// NEW /////
-if (ball.isOffScreen() && ball.vx > 0) {
-  leftPaddle.Score();
-  ball.reset();
-} else if (ball.isOffScreen() && ball.vx < 0) {
-  rightPaddle.Score();
-  ball.reset();
-}
-// rightPaddle.Score();
-///// END NEW ////
-
+            ///// NEW /////
+          if (ball.isOffScreen() && ball.vx > 0) {
+           leftPaddle.score++;
+           ball.reset();
+          } else if (ball.isOffScreen() && ball.vx < 0) {
+           rightPaddle.score++;
+           ball.reset();
+          }
 
 
     ball.handleCollision(leftPaddle);
@@ -84,8 +81,8 @@ if (ball.isOffScreen() && ball.vx > 0) {
    leftPaddle.winner();
    rightPaddle.winner();
    ///// END NEW ////
-}
 
+  }
   else {
     gameover();
   }
