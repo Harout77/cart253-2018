@@ -27,10 +27,10 @@ function setup() {
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
   // Create the right paddle with UP and DOWN as controls
-  rightPaddle = new Paddle(width-20,height/2,10,60,10,DOWN_ARROW,UP_ARROW,LEFT_ARROW,RIGHT_ARROW);
+  rightPaddle = new Paddle(width-20,height/2,10,60,10,DOWN_ARROW,UP_ARROW,LEFT_ARROW,RIGHT_ARROW,0);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(5,height/2,10,60,10,83,87,65,68);
+  leftPaddle = new Paddle(5,height/2,10,60,10,83,87,65,68,0);
   //// NEW /////
   //setup the background colours
   startColor = color(255, 255, 255);
@@ -61,9 +61,18 @@ function draw() {
     leftPaddle.update();
     rightPaddle.update();
 
-    if (ball.isOffScreen()) {
-      ball.reset();
-    }
+    ///// NEW /////
+if (ball.isOffScreen() && ball.vx > 0) {
+  leftPaddle.Score();
+  ball.reset();
+} else if (ball.isOffScreen() && ball.vx < 0) {
+  rightPaddle.Score();
+  ball.reset();
+}
+// rightPaddle.Score();
+///// END NEW ////
+
+
 
     ball.handleCollision(leftPaddle);
     ball.handleCollision(rightPaddle);
@@ -71,11 +80,13 @@ function draw() {
     ball.display();
     leftPaddle.display();
     rightPaddle.display();
+    ///// NEW /////
+   leftPaddle.winner();
+   rightPaddle.winner();
+   ///// END NEW ////
+}
 
-  }
   else {
     gameover();
   }
-
-
 }

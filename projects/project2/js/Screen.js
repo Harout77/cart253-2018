@@ -26,9 +26,6 @@ background(0)
   text("PONG DELUX", width/5 ,height/2);
 }
 
-
-
-
 function startGame(){
   intro =false;
 }
@@ -42,3 +39,19 @@ function backgroundRandomizer(){
       startColor = newColor;
       newColor = color(random(255),random(255),random(255)); }
   }
+
+
+
+
+
+  ///// NEW
+
+function gameover() {
+
+background(0)
+textFont(pixelfont);
+textSize(38);
+fill(0,255,0);
+text("PONG DELUX", width/5 ,height/2);
+}
+  //// END NEW

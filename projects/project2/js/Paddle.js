@@ -6,7 +6,7 @@
 // Paddle constructor
 //
 // Sets the properties with the provided arguments or defaults
-function Paddle(x,y,w,h,speed,downKey,upKey,leftKey,rightKey) {
+function Paddle(x,y,w,h,speed,downKey,upKey,leftKey,rightKey,score) {
   this.x = x;
   this.y = y;
   this.vx = 0;
@@ -19,6 +19,8 @@ function Paddle(x,y,w,h,speed,downKey,upKey,leftKey,rightKey) {
   /////// NEW //////
   this.leftKey = leftKey;
   this.rightKey = rightKey;
+  this.score = score;
+  ////// END NEW /////
 }
 
 
@@ -33,6 +35,7 @@ Paddle.prototype.handleInput = function() {
   else if (keyIsDown(this.downKey)) {
     this.vy = this.speed;
   }
+  ////// NEW //////
   else if (keyIsDown(this.leftKey)) {
     this.vx = -this.speed;
   }
@@ -45,7 +48,6 @@ Paddle.prototype.handleInput = function() {
     this.vx = 0
   }
 }
-
 // update()
 // Update y position based on velocity
 // Constrain the resulting position to be within the canvas
@@ -55,6 +57,7 @@ Paddle.prototype.update = function() {
   this.x += this.vx;
   this.x = constrain(this.x,0,width-this.w);
 }
+//////END NEW ////
 
 // display()
 //
@@ -66,3 +69,58 @@ Paddle.prototype.display = function() {
   ////// END NEW ////
   rect(this.x,this.y,this.w,this.h);
 }
+
+Paddle.prototype.winner = function() {
+
+/// If you score 4 points you win
+        if (this.score === 1) {
+          gameOver = true;
+        }
+       }
+
+
+///// NEW
+//
+    Paddle.prototype.Score = function() {
+        this.score ++ ;
+      }
+        //
+        // if (this.score === 1) {
+        //   this.h = 40;
+        // }
+        // if (this.score === 2) {
+        //   this.h = 30;
+        // }
+        // if (this.score === 3) {
+        //   this.h = 20;
+        // }
+
+      ///// END NEW ////
+//
+//       }
+//
+//       Paddle.prototype.winner = function() {
+//
+// /// If you score 4 points you win
+//         if (this.score === 1) {
+//           this.vx = 0;
+//           this.vy = 0;
+//           this.x = width/2;
+//           this.y = height/2;
+//
+// // a win screen pops ou when you win
+//     background(0)
+//
+//      textSize(50);
+//      textAlign(CENTER);
+//      fill (0,255,0);
+//      text("WIN",width/2,height/2);
+//      fill (0,255,0);
+//      textSize(24);
+//      text("PRESS RETURN OR ENTER TO PLAY AGAIN",width/2 ,height/2 + 60);
+//        if (keyIsDown(13)) {
+//      location.reload();    }
+//
+//         }
+//       }
+// //// END NEW
