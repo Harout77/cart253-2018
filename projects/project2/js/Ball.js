@@ -9,7 +9,7 @@
 // set up color for random rgb
 
 // Sets the properties with the provided arguments
-function Ball(x,y,vx,vy,size,speed) {
+function Ball(x, y, vx, vy, size, speed) {
   this.x = x;
   this.y = y;
   this.vx = vx;
@@ -17,7 +17,9 @@ function Ball(x,y,vx,vy,size,speed) {
   this.size = size;
   this.speed = speed;
 }
-function BadBall(x,y,vx,vy,size,speed) {
+////// NEW //////
+///// Properties for the bad ball ///////
+function BadBall(x, y, vx, vy, size, speed) {
   this.x = x;
   this.y = y;
   this.vx = vx;
@@ -28,100 +30,90 @@ function BadBall(x,y,vx,vy,size,speed) {
 
 //// NEW /////
 var r, g, b;
-  function preload() {
-    beepSFX = new Audio("assets/sounds/beep.wav");
-  }
 
-  ////// END NEW ///////
+function preload() {
+  beepSFX = new Audio("assets/sounds/beep.wav");
+}
+
+////// END NEW ///////
 // update()
 //
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
-Ball.prototype.update = function () {
+Ball.prototype.update = function() {
   // Update position with velocity
   this.x += this.vx;
   this.y += this.vy;
 
   // Constrain y position to be on screen
-  this.y = constrain(this.y,0,height-this.size);
+  this.y = constrain(this.y, 0, height - this.size);
 
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
 
-
     ///// NEW /////
     /// Play beep at each collision
     beepSFX.currentTime = 0;
     beepSFX.play();
-
   }
 }
-BadBall.prototype.update = function () {
+BadBall.prototype.update = function() {
   // Update position with velocity
   this.x += this.vx;
   this.y += this.vy;
 
   // Constrain y position to be on screen
-  this.y = constrain(this.y,0,height-this.size);
+  this.y = constrain(this.y, 0, height - this.size);
 
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
 
-
     ///// NEW /////
     /// Play beep at each collision
     beepSFX.currentTime = 0;
     beepSFX.play();
-
   }
 }
 // isOffScreen()
 //
 // Checks if the ball has moved off the screen and, if so, returns true.
 // Otherwise it returns false.
-Ball.prototype.isOffScreen = function () {
+Ball.prototype.isOffScreen = function() {
   // Check for going off screen and reset if so
   if (this.x + this.size < 0 || this.x > width) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
-
 }
-BadBall.prototype.isOffScreen = function () {
+BadBall.prototype.isOffScreen = function() {
   // Check for going off screen and reset if so
   if (this.x + this.size < 0 || this.x > width) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
-
 }
-
-
 // display()
 //
 // Draw the ball as a rectangle on the screen
-Ball.prototype.display = function () {
+Ball.prototype.display = function() {
   ////// NEW ///////
   //// Randomize the color of the ball
   fill(r, g, b);
   noStroke();
-  rect(this.x,this.y,this.size,this.size);
+  rect(this.x, this.y, this.size, this.size);
 }
-BadBall.prototype.display = function () {
+BadBall.prototype.display = function() {
   ////// NEW ///////
   //// Randomize the color of the ball
-  fill(255,0,0);
+  fill(255, 0, 0);
   noStroke();
-  rect(this.x,this.y,this.size,this.size);
+  rect(this.x, this.y, this.size, this.size);
 }
-
 // handleCollision(paddle)
 //
 // Check if this ball overlaps the paddle passed as an argument
@@ -136,6 +128,7 @@ Ball.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+      this.vy = -this.vy;
 
       ////// NEW /////
       ///Play sound at each collision
@@ -145,6 +138,8 @@ Ball.prototype.handleCollision = function(paddle) {
     }
   }
 }
+/////// NEW //////
+
 BadBall.prototype.handleCollision = function(paddle) {
   // Check if the ball overlaps the paddle on x axis
   if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
@@ -155,56 +150,55 @@ BadBall.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+      this.vy = -this.vy;
 
+      // if (leftPaddle === paddle){
+      //   leftPaddle.score-- ;
+      // }
+      //   if (paddle === rightPaddle){
+      //   rightPaddle.score--;
+      // }
 
-      if (leftPaddle){
-        leftPaddle.score-- ;
-      }
-       if (rightPaddle){
-        rightPaddle.score--;
-      }
+      paddle.score--;
+
       ////// NEW /////
       ///Play sound at each collision
       beepSFX.currentTime = 0;
       beepSFX.play();
       ///// END NEW //////
     }
-
   }
-
 }
-
 // reset()
 //
 // Set position back to the middle of the screen
-Ball.prototype.reset = function (winner) {
-  this.x = width/2;
-  this.y = height/2;
+Ball.prototype.reset = function(winner) {
+  this.x = width / 2;
+  this.y = height / 2;
   ///// NEW ////
-  this.vy = random(-5,10);
+  this.vy = random(-5, 10);
   // //  Speed increase with each RESET
   this.speed = -this.speed;
-  this.vx = -1*this.vx;
+  this.vx = -1 * this.vx;
   // ball gets bigger also;
-    this.size = random(7,30);
+  this.size = random(7, 30);
 
 
-    // Change colors randomly at each reset
+  // Change colors randomly at each reset
   r = random(255);
   g = random(255);
   b = random(255);
   /////  End New ////
 }
 // Set position back to the middle of the screen
-BadBall.prototype.reset = function (winner) {
-  this.x = width/2;
-  this.y = height/2;
+BadBall.prototype.reset = function(winner) {
+  this.x = width / 2;
+  this.y = height / 2;
   ///// NEW ////
-  this.vy = random(-5,10);
+  this.vy = random(-5, 10);
   // //  Speed increase with each RESET
   this.speed = -this.speed;
-  this.vx = -1*this.vx;
+  this.vx = -1 * this.vx;
   // ball gets bigger also;
-    this.size = random(7,30);
-
+  this.size = random(7, 30);
 }
