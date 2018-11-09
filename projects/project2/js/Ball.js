@@ -30,9 +30,12 @@ function BadBall(x, y, vx, vy, size, speed) {
 
 //// NEW /////
 var r, g, b;
-
+var hitsound;
+var losesound;
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
+  hitsound = new Audio("assets/sounds/hit.wav");
+  losesound = new Audio("assets/sounds/lose.wav");
 }
 
 ////// END NEW ///////
@@ -73,8 +76,8 @@ BadBall.prototype.update = function() {
 
     ///// NEW /////
     /// Play beep at each collision
-    beepSFX.currentTime = 0;
-    beepSFX.play();
+    hitsound.currentTime = 0;
+    hitsound.play();
   }
 }
 // isOffScreen()
@@ -84,6 +87,11 @@ BadBall.prototype.update = function() {
 Ball.prototype.isOffScreen = function() {
   // Check for going off screen and reset if so
   if (this.x + this.size < 0 || this.x > width) {
+    ////// NEW /////
+    ///Play sound at each collision
+    losesound.currentTime = 0;
+    losesound.play();
+    ///// END NEW //////
     return true;
   } else {
     return false;
@@ -163,8 +171,8 @@ BadBall.prototype.handleCollision = function(paddle) {
 
       ////// NEW /////
       ///Play sound at each collision
-      beepSFX.currentTime = 0;
-      beepSFX.play();
+      hitsound.currentTime = 0;
+      hitsound.play();
       ///// END NEW //////
     }
   }

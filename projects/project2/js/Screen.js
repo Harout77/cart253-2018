@@ -9,6 +9,8 @@ var pixelfont;
 function preload() {
   pixelfont = loadFont("assets/font/pixel.ttf");
   beepSFX = new Audio("assets/sounds/beep.wav");
+  hitsound = new Audio("assets/sounds/hit.wav");
+  losesound = new Audio("assets/sounds/lose.wav");
 
   ///// Title intro with delay of 3seconds
 }
