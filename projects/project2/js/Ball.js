@@ -167,7 +167,11 @@ BadBall.prototype.handleCollision = function(paddle) {
       //   rightPaddle.score--;
       // }
 
-      paddle.score--;
+      paddle.score-- ;
+      paddle.score = constrain(paddle.score,0,11)
+
+
+
 
       ////// NEW /////
       ///Play sound at each collision
