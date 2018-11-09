@@ -89,6 +89,7 @@ function draw() {
     leftPaddle.display();
     rightPaddle.display();
 
+
     if (rightPaddle.score === 11 || leftPaddle.score === 11) {
       gameOver = true;
     }

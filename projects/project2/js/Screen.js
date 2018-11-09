@@ -37,8 +37,6 @@ function backgroundRandomizer() {
     newColor = color(random(255), random(255), random(255));
   }
 }
-
-
 ////// Display the score of both players
 
 function displayScore() {
@@ -50,9 +48,6 @@ function displayScore() {
   text(leftPaddle.score, width / 4, height / 2);
 
 }
-
-
-
 ////// Game Over screen
 
 function gameover() {
@@ -74,5 +69,4 @@ function gameover() {
   if (keyIsDown(13)) {
     location.reload();
   }
-
 }
