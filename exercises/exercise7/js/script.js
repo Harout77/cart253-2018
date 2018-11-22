@@ -13,9 +13,12 @@ author, and this description to match your project!
 //
 // Description of preload
 
-
+///// VARIALES FOR MY GAME /////
 var paddle;
 var ball;
+
+
+////// LOAD ASSETS /////
 
 function preload() {
 
@@ -54,7 +57,7 @@ paddle.edges();
 //// Ball functions /////
 
 ball.display();
-
+ball.update();
 
 
 
