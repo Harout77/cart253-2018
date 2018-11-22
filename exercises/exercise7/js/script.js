@@ -46,8 +46,15 @@ function draw() {
 background(0);
 
 paddle.display();
-paddle.move(10);
+paddle.update();
+
+}
 
 
 
+function keyPressed() {
+
+if (key ==='ArrowLeft') {
+  paddle.isMovingLeft = true;
+}
 }

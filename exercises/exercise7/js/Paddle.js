@@ -4,8 +4,8 @@ function Paddle() {
 this.w = 160;
 this.h = 20;
 
-// this.isMovingLeft = false;
-// this.isMovingRight = false;
+this.isMovingLeft = false;
+this.isMovingRight = false;
 
 this.pos = createVector(width/ 2, height -40);
 
@@ -18,4 +18,22 @@ this.move = function(Move) {
   this.pos.x += Move ;
 }
 
+this.update = function () {
+  if (this.isMovingLeft) {
+    this.move(-20);
+  }
+  else if (this.isMovingRight) {
+    this.move(20);
+  }
+}
+}
+
+function keyPressed() {
+
+if (key ==='ArrowLeft') {
+  paddle.isMovingLeft = true;
+}
+else if (key ==='ArrowRight') {
+  paddle.isMovingRight = true;
+}
 }
