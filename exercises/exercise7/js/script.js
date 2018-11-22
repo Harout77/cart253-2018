@@ -1,7 +1,7 @@
 /*****************
 BREAKER PROTOTYPE
 
-HAROUT KULLUKIANnew
+HAROUT KULLUKIAN
 
 
 This is a template. You must fill in the title,
@@ -15,7 +15,7 @@ author, and this description to match your project!
 
 
 var paddle;
-
+var ball;
 
 function preload() {
 
@@ -30,7 +30,7 @@ function setup() {
 
 createCanvas(windowWidth, windowHeight);
 paddle = new Paddle();
-
+ball = new Ball();
 
 
 
@@ -45,8 +45,18 @@ function draw() {
 
 background(0);
 
+//// Paddle functions /////
 paddle.display();
 paddle.update();
 paddle.edges();
+
+
+//// Ball functions /////
+
+ball.display();
+
+
+
+
 
 }
