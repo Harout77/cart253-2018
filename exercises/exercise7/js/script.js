@@ -47,14 +47,6 @@ background(0);
 
 paddle.display();
 paddle.update();
+paddle.edges();
 
-}
-
-
-
-function keyPressed() {
-
-if (key ==='ArrowLeft') {
-  paddle.isMovingLeft = true;
-}
 }
