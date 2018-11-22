@@ -58,6 +58,7 @@ paddle.edges();
 
 ball.display();
 ball.update();
+ball.bounce();
 
 
 

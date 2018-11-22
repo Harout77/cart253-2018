@@ -14,13 +14,25 @@ function Ball() {
     ellipse(this.pos.x, this.pos.y, this.r * 2, this.r * 2);
 
   }
-  /// Move the ball //// 
+  /// Move the ball ////
   this.update = function() {
 
     this.pos.x += this.v.x * this.d.x;
     this.pos.y += this.v.y * this.d.y;
-
-
   }
+
+  //// boune off the edges of the canvas to prevent off screen
+  this.bounce = function() {
+    if (this.pos.x < this.r && this.d.x < 0)
+             this.d.x *= -1;
+    else if (this.pos.x > width - this.r && this.d.x > 0)
+             this.d.x *= -1;
+    else if (this.pos.y < this.r && this.d.y < 0)
+            this.d.y *= -1;
+    else if (this.pos.y > height - this.r && this.d.y > 0)
+             this.d.y *= -1;
+      }
+
+
 
 }
