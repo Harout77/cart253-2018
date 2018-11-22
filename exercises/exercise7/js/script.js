@@ -43,10 +43,10 @@ paddle = new Paddle();
 
 function draw() {
 
-background(255);
+background(0);
 
 paddle.display();
-
+paddle.move(10);
 
 
 
