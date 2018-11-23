@@ -29,8 +29,8 @@ function Ball() {
              this.d.x *= -1;
     else if (this.pos.y < this.r && this.d.y < 0)
             this.d.y *= -1;
-    else if (this.pos.y > height - this.r && this.d.y > 0)
-             this.d.y *= -1;
+    // else if (this.pos.y > height - this.r && this.d.y > 0)
+    //          this.d.y *= -1;
       }
 
       this.collides = function(paddle) {
