@@ -36,7 +36,8 @@ createCanvas(windowWidth, windowHeight);
 paddle = new Paddle();
 ball = new Ball();
 // star = new Star();
-for (let i = 0; i < random(5,30); i++) {
+//// Array of star
+for (let i = 0; i < random(20,50); i++) {
     star.push(new Star());
 }
 
@@ -69,8 +70,13 @@ if (ball.collides(paddle) && ball.d.y > 0 )
 
 
 //// Shaped function /////
-for (var s =0; s < star.length; s++) {
+for (var s = 0; s < star.length; s++) {
   star[s].display();
-}
 
-}
+   if (ball.break(star[s])) {
+
+       star.splice(s, 1);
+     }
+     ball.d.y *= -1;
+   }
+ }

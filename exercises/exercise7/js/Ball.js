@@ -42,7 +42,13 @@ function Ball() {
             return true;
           } else return false ;
       }
-
-
+      this.break = function(star) {
+   var d = dist(this.pos.x, this.pos.y, star.pos.x, star.pos.y);
+   if (d < star.r + this.r) {
+     return true;
+   } else {
+     return false;
+   }
+ }
 
 }

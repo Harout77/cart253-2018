@@ -12,6 +12,7 @@ this.pos = createVector(width/ 2, height -60);
 
 ///// Display the paddle //////
 this.display = function () {
+  fill(57, 255, 20);
   rect(this.pos.x, this.pos.y, this.w, this.h);
 
 }
