@@ -32,7 +32,7 @@ function Ball() {
     // else if (this.pos.y > height - this.r && this.d.y > 0)
     //          this.d.y *= -1;
   }
-///// collision with the paddle ////////////
+  ///// collision with the paddle ////////////
   this.collides = function(paddle) {
     if (this.pos.y < paddle.pos.y &&
       this.pos.y > paddle.pos.y - this.r &&
