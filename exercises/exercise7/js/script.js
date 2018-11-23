@@ -59,6 +59,8 @@ paddle.edges();
 ball.display();
 ball.update();
 ball.bounce();
+if (ball.collides(paddle) && ball.d.y > 0 )
+    ball.d.y *= -1;
 
 
 

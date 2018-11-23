@@ -33,6 +33,16 @@ function Ball() {
              this.d.y *= -1;
       }
 
+      this.collides = function(paddle) {
+      if (this.pos.y < paddle.pos.y &&
+          this.pos.y > paddle.pos.y - this.r &&
+          this.pos.x > paddle.pos.x - this.r &&
+          this.pos.x < paddle.pos.x + paddle.w + this.r)
+          {
+            return true;
+          } else return false ;
+      }
+
 
 
 }
