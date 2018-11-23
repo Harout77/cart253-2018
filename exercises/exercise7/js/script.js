@@ -16,6 +16,7 @@ author, and this description to match your project!
 ///// VARIALES FOR MY GAME /////
 var paddle;
 var ball;
+var star;
 
 
 ////// LOAD ASSETS /////
@@ -34,6 +35,7 @@ function setup() {
 createCanvas(windowWidth, windowHeight);
 paddle = new Paddle();
 ball = new Ball();
+star = new Star();
 
 
 
@@ -63,6 +65,8 @@ if (ball.collides(paddle) && ball.d.y > 0 )
     ball.d.y *= -1;
 
 
+//// Shaped function /////
+star.display();
 
 
 }
