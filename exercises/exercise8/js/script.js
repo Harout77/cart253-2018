@@ -32,14 +32,16 @@ function preload() {
 
 function setup() {
 
-createCanvas(windowWidth, windowHeight);
-paddle = new Paddle();
-ball = new Ball();
-// star = new Star();
-//// Array of star
-for (let i = 0; i < random(20,50); i++) {
+  //// create fullscreen canvas /////
+  createCanvas(windowWidth, windowHeight);
+  ///// setup variables
+  paddle = new Paddle();
+  ball = new Ball();
+  // star = new Star();
+  //// Array of star
+  for (let i = 0; i < random(20, 50); i++) {
     star.push(new Star());
-}
+  }
 
 
 
@@ -52,31 +54,32 @@ for (let i = 0; i < random(20,50); i++) {
 
 function draw() {
 
-background(0);
+  background(0);
 
-//// Paddle functions /////
-paddle.display();
-paddle.update();
-paddle.edges();
+  //// Paddle functions /////
+  paddle.display();
+  paddle.update();
+  paddle.edges();
 
 
-//// Ball functions /////
+  //// Ball functions /////
 
-ball.display();
-ball.update();
-ball.bounce();
-if (ball.collides(paddle) && ball.d.y > 0 )
+  ball.display();
+  ball.update();
+  ball.bounce();
+  if (ball.collides(paddle) && ball.d.y > 0)
     ball.d.y *= -1;
 
 
-//// Shaped function /////
-for (var s = 0; s < star.length; s++) {
-  star[s].display();
+  //// Shaped function /////
+  for (var s = 0; s < star.length; s++) {
+    star[s].display();
 
-   if (ball.break(star[s])) {
-
-       star.splice(s, 1);
-     }
-     ball.d.y *= -1;
-   }
- }
+    if (ball.break(star[s])) {
+      ///// break the star
+      star.splice(s, 1);
+    }
+    ///// bounce back when break
+    ball.d.y *= -1;
+  }
+}

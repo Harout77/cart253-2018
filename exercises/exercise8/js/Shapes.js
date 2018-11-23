@@ -7,10 +7,6 @@ function Star(pos, r) {
     push();
     fill(255,223,0);
     translate(this.pos.x, this.pos.y);
-    beginShape();
-
-
-
 
 //// creat custom shape of my strar
     beginShape();
