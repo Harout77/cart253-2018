@@ -7,6 +7,7 @@ mgr = new SceneManager();
 
 mgr.addScene ( Intro );
 mgr.addScene ( Game1 );
+mgr.addScene ( Game2 );
 
 mgr.showNextScene();
 
@@ -33,9 +34,9 @@ function keyPressed()
         case '2':
             mgr.showScene( Game1 );
             break;
-        // case '3':
-        //     mgr.showScene( game2 );
-        //     break;
+        case '3':
+            mgr.showScene( Game2 );
+            break;
     }
 
     // ... then dispatch via the SceneManager.
@@ -56,18 +57,11 @@ this.draw = function()
     textAlign(CENTER);
     textSize(36);
     text('Press any key to begin', displayWidth / 2, displayHeight /2);
-  
   }
-
-
-
-
     this.mousePressed = function()
     {
         this.sceneManager.showNextScene();
     }
-
-
 }
 
 function Game1(){
@@ -84,10 +78,27 @@ function Game1(){
        textSize(36);
        text('Press any key to begin', displayWidth / 2, displayHeight /2);
      }
-
      this.mousePressed = function()
      {
          this.sceneManager.showNextScene();
      }
+}
+function Game2(){
 
+     this.draw = function()
+     {
+       background("blue")
+       fill("black");
+       textAlign(CENTER);
+       textSize(64);
+       text('Master Game Project V 1.0', displayWidth / 2, displayHeight /2.5);
+       fill("yellow");
+       textAlign(CENTER);
+       textSize(36);
+       text('Press any key to begin', displayWidth / 2, displayHeight /2);
+     }
+     this.mousePressed = function()
+     {
+         this.sceneManager.showNextScene();
+     }
 }
