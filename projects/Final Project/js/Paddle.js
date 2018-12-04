@@ -52,6 +52,11 @@ function keyPressed() {
   else if (key === 'ArrowRight') {
     paddle.isMovingRight = true;
   }
+  else if (key ==='a') {
+    playing = true;
+    win = false;
+
+  }
 }
 ///// STOP IF NOW PRESSING /////
 function keyReleased() {

@@ -70,6 +70,8 @@ this.draw = function()
 var paddle;
 var ball;
 var star = [];
+var playing = false;
+var win = false
 
 function Game1() {
 
@@ -97,15 +99,15 @@ this.draw = function() {
 
   //// Paddle functions /////
   paddle.display();
-  paddle.update();
-  paddle.edges();
+  if (playing) paddle.update();
+  if (playing) paddle.edges();
 
 
   //// Ball functions /////
 
   ball.display();
-  ball.update();
-  ball.bounce();
+  if (playing) ball.update();
+  if (playing) ball.bounce();
   if (ball.collides(paddle) && ball.d.y > 0)
     ball.d.y *= -1;
 
@@ -120,6 +122,14 @@ this.draw = function() {
     }
     ///// bounce back when break
     ball.d.y *= -1;
+  }
+  if (ball.pos.y > height) {
+    plawing = false;
+    ball.pos = createVector(width / 2, height / 2);
+  }
+  if (star.length === 0){
+    win = true;
+    playing = false;
   }
 }
 this.mousePressed = function()
