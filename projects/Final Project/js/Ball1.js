@@ -20,36 +20,6 @@ function preload() {
 
 
 
-    // function Intro() {
-    //
-    //   background(0)
-    //   textFont(pixelfont);
-    //   textSize(38);
-    //   fill(255, 0, 0);
-    //   text("PONG DELUX", width / 5, height / 2);
-    // }
-    //
-    //
-    // function gameover() {
-    //
-    //   background(0)
-    //   textFont(pixelfont);
-    //   textSize(38);
-    //
-    //   if (rightPaddle.score === 11) {
-    //     fill(0, 255, 0);
-    //     text("RIGHT WON", width / 2, height / 2);
-    //   } else if (leftPaddle.score === 11) {
-    //     fill(0, 0, 255);
-    //     text("LEFT WON", width / 2, height / 2);
-    //   }
-    //
-    //   textSize(18);
-    //   text("PRESS RETURN OR ENTER TO PLAY AGAIN", width / 2, height / 2 + 60);
-    //   if (keyIsDown(13)) {
-    //     location.reload();
-    //   }
-    // }
 // Sets the properties with the provided arguments
 function Ball1(x,y,vx,vy,size,speed) {
   this.x = x;

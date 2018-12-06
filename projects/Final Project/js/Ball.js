@@ -1,3 +1,11 @@
+
+function preload() {
+  beepSFX = new Audio("assets/sounds/beep.wav");
+  hitsound = new Audio("assets/sounds/hit.wav");
+  losesound = new Audio("assets/sounds/lose.wav");
+   pixelfont = loadFont("assets/font/pixel.ttf");
+}
+
 function Ball() {
   /////// display the position of the ball ////
   this.pos = createVector(width / 2, height / 2);
@@ -29,8 +37,7 @@ function Ball() {
       this.d.x *= -1;
     else if (this.pos.y < this.r && this.d.y < 0)
       this.d.y *= -1;
-    // else if (this.pos.y > height - this.r && this.d.y > 0)
-    //          this.d.y *= -1;
+
   }
   ///// collision with the paddle ////////////
   this.collides = function(paddle) {
@@ -38,6 +45,8 @@ function Ball() {
       this.pos.y > paddle.pos.y - this.r &&
       this.pos.x > paddle.pos.x - this.r &&
       this.pos.x < paddle.pos.x + paddle.w + this.r) {
+        beepSFX.currentTime = 0;
+        beepSFX.play();
       return true;
     } else return false;
   }
@@ -47,6 +56,8 @@ function Ball() {
   this.break = function(star) {
     var d = dist(this.pos.x, this.pos.y, star.pos.x, star.pos.y);
     if (d < star.r + this.r) {
+      beepSFX.currentTime = 0;
+      beepSFX.play();
       return true;
     } else {
       return false;
