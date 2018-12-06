@@ -144,45 +144,129 @@ this.mousePressed = function()
 function Game2(){
   // Variable to contain the objects representing our Ball1 and Paddle1s
   var balls;
-  var leftPaddle1;
-  var rightPaddle1;
+  var leftPaddle;
+  var rightPaddle;
+  ////// NEW //////
+  // Track whether the game is over
+  var gameOver = false;
+  // var intro = true;
+
+  var badballs = [];
+  var numBalls = 2;
 
   this.setup = function() {
 
     //// create fullscreen canvas /////
-    createCanvas(windowWidth, windowHeight);
-    ///// setup variables
-    balls = new Ball1(width/2,height/2,5,5,10,5);
-    // Create the right Paddle1 with UP and DOWN as controls
-    rightPaddle1 = new Paddle1(width-10,height/2,10,60,10,DOWN_ARROW,UP_ARROW);
-    // Create the left Paddle1 with W and S as controls
-    // Keycodes 83 and 87 are W and S respectively
-    leftPaddle1 = new Paddle1(0,height/2,10,60,10,83,87);
-
+    createCanvas(640, 480);
+  // Create a ball
+  balls = new Ball1(width / 2, height / 2, 5, 5, 10, 5);
+  // Create the right paddle with UP and DOWN as controls
+  rightPaddle = new Paddle1(width - 20, height / 2, 10, 60, 10, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, 0);
+  // Create the left paddle with W and S as controls
+  // Keycodes 83 and 87 are W and S respectively
+  leftPaddle = new Paddle1(5, height / 2, 10, 60, 10, 83, 87, 65, 68, 0);
+  //// NEW /////
+  //setup the background colours
+  startColor = color(255, 255, 255);
+  newColor = color(random(255), random(255), random(255));
+  amt = 0;
+  for (var i = 0; i < numBalls; i++) {
+  badballs.push(new BadBall(width / 2, height / 2, random(-5, 5), random(-5, 5), 10, 5));
   }
+}
 
 
 
   this.draw = function() {
-
     background(0);
+      // if (intro) {
+      //   setTimeout(startGame, 3000);
+      //   Intro1();
+      // } else if (!gameOver) {
 
-  leftPaddle1.handleInput();
-  rightPaddle1.handleInput();
+        backgroundRandomizer();
+        displayScore();
+        leftPaddle.handleInput();
+        rightPaddle.handleInput();
 
-  balls.update();
-  leftPaddle1.update();
-  rightPaddle1.update();
+        balls.update();
+        leftPaddle.update();
+        rightPaddle.update();
 
-  if (balls.isOffScreen()) {
-    balls.reset();
-  }
+        ///// NEW /////
+        if (balls.isOffScreen() && ball.vx > 0) {
+          leftPaddle.score++;
+          balls.reset();
+        } else if (balls.isOffScreen() && ball.vx < 0) {
+          rightPaddle.score++;
+          balls.reset();
+        }
 
-  balls.handleCollision(leftPaddle1);
-  balls.handleCollision(rightPaddle1);
+        for (var i = 0; i < badballs.length; i++) {
+          badballs[i].update();
+          if (badballs[i].isOffScreen()) {
+            badballs[i].reset();
+          }
+          badballs[i].handleCollision(leftPaddle);
+          badballs[i].handleCollision(rightPaddle);
+          badballs[i].display();
+        }
+        balls.handleCollision(leftPaddle);
+        balls.handleCollision(rightPaddle);
 
-  balls.display();
-  leftPaddle1.display();
-  rightPaddle1.display();
-  }
-  }
+        balls.display();
+        leftPaddle.display();
+        rightPaddle.display();
+
+
+        if (rightPaddle.score === 11 || leftPaddle.score === 11) {
+          gameOver = true;
+        }
+       else if (gameOver) {
+        gameover();
+      }
+      // function to randomize the background colour
+      function backgroundRandomizer() {
+        background(lerpColor(startColor, newColor, amt));
+        amt += 0.01;
+        if (amt >= 1) {
+          amt = 0.0;
+          startColor = newColor;
+          newColor = color(random(255), random(255), random(255));
+        }
+      }
+      ////// Display the score of both players
+
+      function displayScore() {
+
+        textAlign(CENTER, CENTER);
+        textSize(32);
+        fill(255);
+        text(rightPaddle.score, width / 4 * 3, height / 2);
+        text(leftPaddle.score, width / 4, height / 2);
+
+      }
+      ////// Game Over screen
+
+      function gameover() {
+
+        background(0)
+        textFont(pixelfont);
+        textSize(38);
+
+        if (rightPaddle.score === 11) {
+          fill(0, 255, 0);
+          text("RIGHT WON", width / 2, height / 2);
+        } else if (leftPaddle.score === 11) {
+          fill(0, 0, 255);
+          text("LEFT WON", width / 2, height / 2);
+        }
+
+        textSize(18);
+        text("PRESS RETURN OR ENTER TO PLAY AGAIN", width / 2, height / 2 + 60);
+        if (keyIsDown(13)) {
+          location.reload();
+        }
+      }
+    }
+    }
