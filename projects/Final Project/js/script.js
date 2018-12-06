@@ -1,3 +1,27 @@
+/////////****************************************
+/////////*                                      *
+/////////*     FINAL GAME PROJECT !!!!!         *
+/////////*                                      *
+/////////*    By HAROUT KULLUKIAN               *
+/////////****************************************
+
+
+
+// by Harout Kullukian
+//
+// A Collection of 2 of my final games created combined
+// together with a p5.js library Scene Manager.
+// SceneManager let's you put together as many as canvases as you want
+// on a sigle program and switch between canvas however you want to
+// 
+//
+// Written with JavaScript OOP and P5.js.
+
+
+
+
+
+/// Scene manager variable
 var mgr;
 
 function setup() {
@@ -5,6 +29,7 @@ createCanvas(displayWidth,displayHeight);
 // background(0);
 mgr = new SceneManager();
 
+/// Pre loading SCENES (CANVAS)
 mgr.addScene ( Intro );
 mgr.addScene ( Game1 );
 mgr.addScene ( Game2 );
@@ -18,6 +43,7 @@ mgr.draw();
 
 }
 
+//// mousePressed EVENT
 function mousePressed()
 {
     mgr.handleEvent("mousePressed");
@@ -47,6 +73,8 @@ function keyPressed()
 function Intro () {
 
 this.draw = function()
+
+////// INTRO TITLE SCENE /////////////
   {
     background("black")
     fill("red");
@@ -56,7 +84,9 @@ this.draw = function()
     fill("yellow");
     textAlign(CENTER);
     textSize(36);
-    text('Press any key to begin', displayWidth / 2, displayHeight /2);
+    text('Mouse Click to change game', displayWidth / 2, displayHeight /2);
+
+    /////////// Function to switch canvas on mouse click ///////////
   }
     this.mousePressed = function()
     {
@@ -67,6 +97,8 @@ this.draw = function()
 
 /////////// BEGIN GAME 1 ///////////////
 
+
+/////// Assigning Variables //////////
 var paddle;
 var ball;
 var star = [];
@@ -132,6 +164,9 @@ this.draw = function() {
     playing = false;
   }
 }
+
+/////////// Function to switch canvas on mouse click ///////////
+
 this.mousePressed = function()
 {
     this.sceneManager.showNextScene();
@@ -140,6 +175,7 @@ this.mousePressed = function()
 
 /////////////// END OF GAME 1 /////////////
 
+/////////////// BEGIN  OF GAME 2 /////////////
 
 function Game2(){
   // Variable to contain the objects representing our Ball1 and Paddle1s
@@ -173,8 +209,7 @@ if(intro) {
 }
 else if (startGame ){
 
-
-    // background(0);
+ //////// Load all functions  /////////////
   backgroundRandomizer();
   displayScore();
   leftPaddle1.handleInput();
@@ -190,6 +225,8 @@ else if (startGame ){
   balls.display();
   leftPaddle1.display();
   rightPaddle1.display();
+
+  //////////// Check if ball is off screen and which side add a point /////////////
 
   if (balls.isOffScreen() && balls.vx > 0) {
       leftPaddle1.score++;
@@ -207,7 +244,7 @@ else if (startGame ){
 
 }
 
-
+///////////// Randomize BaCKGROUND Colore ////////////
   function backgroundRandomizer() {
     background(lerpColor(startColor, newColor, amt));
     amt += 0.01;
@@ -217,6 +254,8 @@ else if (startGame ){
       newColor = color(random(255), random(255), random(255));
     }
   }
+
+  //////////// DISPLAY SCORE /////////////
   function displayScore() {
 
   textAlign(CENTER, CENTER);
@@ -227,6 +266,8 @@ else if (startGame ){
 
 }
 function Intro() {
+
+////////// Intro title scene ///////////
 
   background(0)
   textFont(pixelfont);
@@ -246,12 +287,15 @@ function Intro() {
 
   }
 }
+////////// Game Over title scene ///////////
 function gameover() {
   startGame = false
   intro = false
   background(0)
   textFont(pixelfont);
   textSize(38);
+
+  ////////// Determine which side won !! ////////////
 
   if (rightPaddle1.score === 11) {
     fill(0, 255, 0);
@@ -267,8 +311,12 @@ function gameover() {
     location.reload();
   }
 }
+
+/////////// Function to switch canvas on mouse click ///////////
+
 this.mousePressed = function()
 {
     this.sceneManager.showNextScene();
 }
   }
+  /////////////// END OF GAME 2 /////////////

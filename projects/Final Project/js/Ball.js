@@ -1,9 +1,10 @@
 
+
+///// Preloading assets
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
   hitsound = new Audio("assets/sounds/hit.wav");
   losesound = new Audio("assets/sounds/lose.wav");
-   pixelfont = loadFont("assets/font/pixel.ttf");
 }
 
 function Ball() {
