@@ -146,27 +146,37 @@ function Game2(){
   var balls;
   var leftPaddle1;
   var rightPaddle1;
-
+  var gameOver = false ;
+  var intro = true;
+  var startGame = false;
   this.setup = function() {
 
     //// create fullscreen canvas /////
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(displayWidth,displayHeight);
     ///// setup variables
     balls = new Ball1(width/2,height/2,5,5,10,5);
     // Create the right Paddle1 with UP and DOWN as controls
-    rightPaddle1 = new Paddle1(width-10,height/2,10,60,10,DOWN_ARROW,UP_ARROW);
+    rightPaddle1 = new Paddle1(width - 20, height / 2, 10, 60, 10, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, 0);
     // Create the left Paddle1 with W and S as controls
     // Keycodes 83 and 87 are W and S respectively
-    leftPaddle1 = new Paddle1(0,height/2,10,60,10,83,87);
+    leftPaddle1 = new Paddle1(5, height / 2, 10, 60, 10, 83, 87, 65, 68, 0);
 
+    //setup the background colours
+    startColor = color(255, 255, 255);
+    newColor = color(random(255), random(255), random(255));
+    amt = 0;
   }
 
-
-
   this.draw = function() {
+if(intro) {
+  Intro();
+}
+else if (startGame ){
 
-    background(0);
 
+    // background(0);
+  backgroundRandomizer();
+  displayScore();
   leftPaddle1.handleInput();
   rightPaddle1.handleInput();
 
@@ -174,15 +184,91 @@ function Game2(){
   leftPaddle1.update();
   rightPaddle1.update();
 
-  if (balls.isOffScreen()) {
-    balls.reset();
-  }
-
   balls.handleCollision(leftPaddle1);
   balls.handleCollision(rightPaddle1);
 
   balls.display();
   leftPaddle1.display();
   rightPaddle1.display();
+
+  if (balls.isOffScreen() && balls.vx > 0) {
+      leftPaddle1.score++;
+      balls.reset();
+    } else if (balls.isOffScreen() && balls.vx < 0) {
+      rightPaddle1.score++;
+      balls.reset();
+    }
+
+    if (rightPaddle1.score === 11 || leftPaddle1.score === 11) {
+         gameOver = true;}
+       }  if (gameOver) {
+        gameover();
+    }
+
+}
+
+
+  function backgroundRandomizer() {
+    background(lerpColor(startColor, newColor, amt));
+    amt += 0.01;
+    if (amt >= 1) {
+      amt = 0.0;
+      startColor = newColor;
+      newColor = color(random(255), random(255), random(255));
+    }
   }
+  function displayScore() {
+
+  textAlign(CENTER, CENTER);
+  textSize(32);
+  fill(255);
+  text(rightPaddle1.score, width / 4 * 3, height / 2);
+  text(leftPaddle1.score, width / 4, height / 2);
+
+}
+function Intro() {
+
+  background(0)
+  textFont(pixelfont);
+  textSize(46);
+  fill(255, 0, 0);
+  text("PONG DELUX", width / 2, height / 5);
+  textSize(22)
+  textAlign(CENTER)
+  text("The world is a lonely place. Play pong alone in this big world",width / 2 , height / 4)
+  text("Controle both paddle, whichever side gets 11pts you win ! ",width / 2, height / 3.5)
+  text("You are a winner anywways, we are all winners in this big vast lonely world ! ",width / 2, height / 3)
+  textSize(13);
+  text("Press Enter to begin the game", width / 2, height /2.5)
+  if (keyIsDown(13)) {
+    intro = false
+    startGame =true
+
+  }
+}
+function gameover() {
+  startGame = false
+  intro = false
+  background(0)
+  textFont(pixelfont);
+  textSize(38);
+
+  if (rightPaddle1.score === 11) {
+    fill(0, 255, 0);
+    text("RIGHT WON", width / 2, height / 2);
+  } else if (leftPaddle1.score === 11) {
+    fill(0, 0, 255);
+    text("LEFT WON", width / 2, height / 2);
+  }
+
+  textSize(18);
+  text("PRESS RETURN OR ENTER TO PLAY AGAIN", width / 2, height / 2 + 60);
+  if (keyIsDown(13)) {
+    location.reload();
+  }
+}
+this.mousePressed = function()
+{
+    this.sceneManager.showNextScene();
+}
   }
