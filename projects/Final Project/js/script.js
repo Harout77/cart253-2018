@@ -142,21 +142,47 @@ this.mousePressed = function()
 
 
 function Game2(){
+  // Variable to contain the objects representing our Ball1 and Paddle1s
+  var balls;
+  var leftPaddle1;
+  var rightPaddle1;
 
-     this.draw = function()
-     {
-       background("blue")
-       fill("black");
-       textAlign(CENTER);
-       textSize(64);
-       text('Master Game Project V 1.0', displayWidth / 2, displayHeight /2.5);
-       fill("yellow");
-       textAlign(CENTER);
-       textSize(36);
-       text('Press any key to begin', displayWidth / 2, displayHeight /2);
-     }
-     this.mousePressed = function()
-     {
-         this.sceneManager.showNextScene();
-     }
-}
+  this.setup = function() {
+
+    //// create fullscreen canvas /////
+    createCanvas(windowWidth, windowHeight);
+    ///// setup variables
+    balls = new Ball1(width/2,height/2,5,5,10,5);
+    // Create the right Paddle1 with UP and DOWN as controls
+    rightPaddle1 = new Paddle1(width-10,height/2,10,60,10,DOWN_ARROW,UP_ARROW);
+    // Create the left Paddle1 with W and S as controls
+    // Keycodes 83 and 87 are W and S respectively
+    leftPaddle1 = new Paddle1(0,height/2,10,60,10,83,87);
+
+  }
+
+
+
+  this.draw = function() {
+
+    background(0);
+
+  leftPaddle1.handleInput();
+  rightPaddle1.handleInput();
+
+  balls.update();
+  leftPaddle1.update();
+  rightPaddle1.update();
+
+  if (balls.isOffScreen()) {
+    balls.reset();
+  }
+
+  balls.handleCollision(leftPaddle1);
+  balls.handleCollision(rightPaddle1);
+
+  balls.display();
+  leftPaddle1.display();
+  rightPaddle1.display();
+  }
+  }
