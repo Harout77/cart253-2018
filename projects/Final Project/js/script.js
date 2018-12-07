@@ -91,7 +91,8 @@ this.draw = function()
     textAlign(CENTER);
     textSize(36);
     text('Choose the game you want to play by clicking left mouse button ', displayWidth / 2, displayHeight /2);
-    text('Mouse Click to change game', displayWidth / 2, displayHeight /1.8);
+    fill("green")
+    text('More games to come in the future', displayWidth / 2, displayHeight /1.8);
 
     /////////// Function to switch canvas on mouse click ///////////
   }
