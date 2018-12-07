@@ -13,7 +13,7 @@
 // together with a p5.js library Scene Manager.
 // SceneManager let's you put together as many as canvases as you want
 // on a sigle program and switch between canvas however you want to
-// 
+//
 //
 // Written with JavaScript OOP and P5.js.
 
@@ -33,6 +33,8 @@ mgr = new SceneManager();
 mgr.addScene ( Intro );
 mgr.addScene ( Game1 );
 mgr.addScene ( Game2 );
+mgr.addScene ( Outro );
+
 
 mgr.showNextScene();
 
@@ -63,12 +65,15 @@ function keyPressed()
         case '3':
             mgr.showScene( Game2 );
             break;
+            case '4':
+                mgr.showScene( Outro );
+                break;
     }
 
     // ... then dispatch via the SceneManager.
     mgr.handleEvent("keyPressed");
 }
-
+///////// BEGIN INTRO /////////////////
 
 function Intro () {
 
@@ -77,6 +82,7 @@ this.draw = function()
 ////// INTRO TITLE SCENE /////////////
   {
     background("black")
+    textFont(pixelfont);
     fill("red");
     textAlign(CENTER);
     textSize(64);
@@ -84,7 +90,8 @@ this.draw = function()
     fill("yellow");
     textAlign(CENTER);
     textSize(36);
-    text('Mouse Click to change game', displayWidth / 2, displayHeight /2);
+    text('Choose the game you want to play by clicking left mouse button ', displayWidth / 2, displayHeight /2);
+    text('Mouse Click to change game', displayWidth / 2, displayHeight /1.8);
 
     /////////// Function to switch canvas on mouse click ///////////
   }
@@ -103,7 +110,8 @@ var paddle;
 var ball;
 var star = [];
 var playing = false;
-var win = false
+var win = false;
+var intro1 = true;
 
 function Game1() {
 
@@ -126,7 +134,10 @@ this.setup = function() {
 
 
 this.draw = function() {
+if (intro1){
+  Intro1();
 
+} else if (!intro1) {
   background(0);
 
   //// Paddle functions /////
@@ -173,6 +184,30 @@ this.mousePressed = function()
 }
 }
 
+function Intro1() {
+
+////////// Intro title scene ///////////
+
+  background(0)
+  textFont(pixelfont);
+  textSize(46);
+  fill(255, 0, 0);
+  text("BRICK BREAKER", width / 2, height / 5);
+  textSize(22)
+  textAlign(CENTER)
+  text("Brick Breaker is a simple game of breaking shapes",width / 2 , height / 4)
+  text("Destroy all the stars to win the game ",width / 2, height / 3.5)
+  text("use the arrow keys to move the paddles! ",width / 2, height / 3)
+  textSize(22);
+  text("Press Enter to begin the game", width / 2, height /2.5)
+  if (keyIsDown(13)) {
+    intro1 = false
+    playing =true
+
+  }
+}
+
+}
 /////////////// END OF GAME 1 /////////////
 
 /////////////// BEGIN  OF GAME 2 /////////////
@@ -279,7 +314,7 @@ function Intro() {
   text("The world is a lonely place. Play pong alone in this big world",width / 2 , height / 4)
   text("Controle both paddle, whichever side gets 11pts you win ! ",width / 2, height / 3.5)
   text("You are a winner anywways, we are all winners in this big vast lonely world ! ",width / 2, height / 3)
-  textSize(13);
+  textSize(22);
   text("Press Enter to begin the game", width / 2, height /2.5)
   if (keyIsDown(13)) {
     intro = false
@@ -320,3 +355,33 @@ this.mousePressed = function()
 }
   }
   /////////////// END OF GAME 2 /////////////
+  ///////// BEGIN outro /////////////////
+
+  function Outro () {
+
+  this.draw = function()
+
+  ////// INTRO TITLE SCENE /////////////
+    {
+      background("black")
+      fill("red");
+      textAlign(CENTER);
+      textSize(64);
+      text('THANK YOU FOR PLAYING', displayWidth / 2, displayHeight /2.5);
+      fill("yellow");
+      textAlign(CENTER);
+      textSize(36);
+      text('Mouse Click to Play again', displayWidth / 2, displayHeight /2);
+      fill("green")
+      text('Game experience made by Harout Kullukian', displayWidth / 2, displayHeight /1.8);
+
+
+
+      /////////// Function to switch canvas on mouse click ///////////
+    }
+      this.mousePressed = function()
+      {
+          this.sceneManager.showNextScene();
+      }
+  }
+  //////////// END OF outro /////////////
